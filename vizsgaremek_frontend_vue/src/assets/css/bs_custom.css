@@ -1,0 +1,31 @@
+html, body{
+    height: 100%;
+}
+.navbar {
+    --bs-navbar-color: #ffe59b;
+    --bs-navbar-hover-color: #ffc00f;
+    --bs-navbar-active-color: #ffc00f;
+    --bs-navbar-toggler-border-color: #ffe59b;
+    --bs-navbar-toggler-icon-bg:url("data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 30 30%27%3e%3cpath stroke=%27rgba%28255, 229, 155, 100%29%27 stroke-linecap=%27round%27 stroke-miterlimit=%2710%27 stroke-width=%272%27 d=%27M4 7h22M4 15h22M4 23h22%27/%3e%3c/svg%3e")
+}
+
+.bg_light_green{
+    background-color:rgb(212 221 208);
+}
+.text_dark_green{
+    color:rgb(39 100 2);
+}
+.fw_500{
+    font-weight: 500;
+}
+.lg_shadow::after {
+        content: "";
+        display: block;
+        height: 30px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(to bottom, rgb(198 205 194), rgb(212 221 208));
+        z-index: 1;
+}
