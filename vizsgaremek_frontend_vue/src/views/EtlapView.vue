@@ -13,6 +13,7 @@
     components: {
       HelloWorld
     }
-  }
+      }
+      //ez egy VS commit push teszt
   </script>
   
