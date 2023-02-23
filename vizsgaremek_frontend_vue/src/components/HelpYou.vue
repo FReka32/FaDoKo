@@ -1,7 +1,7 @@
 <template>
     <div class="helpyou position-relative ff_comfortaa bg_light_green text_dark_green lg_shadow">
         <div class="container mx-auto p-5">
-            <h2 class="text-center text-2 mb-5">{{ msg }}</h2>
+            <h2 class="text-center text-2 mb-5 pt-5">{{ title }}</h2>
             <div class="d-flex-justify-content-center">
                 <table class="table table-striped helpyou_table text_dark_green" >
                     <tbody>
@@ -32,7 +32,7 @@
 export default {
     name: 'HelpYou',
     props: {
-        msg: String
+        title: String
     }
 }
 </script>

@@ -24,12 +24,10 @@
               <router-link class="nav-link" to="/etlap">Étlap</router-link>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link" to="#kapcsolat"
-                >Kapcsolat</router-link
-              >
+              <a class="nav-link" href="#kapcsolat">Kapcsolat</a>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link" to="#rolunk">Rólunk</router-link>
+              <a class="nav-link" href="#rolunk">Rólunk</a>
             </li>
             <!--li class="nav-item">
 							<router-link class="nav-link" to="/leltar">Leltár</router-link>
@@ -243,7 +241,7 @@
   top: 0;
   left: 0;
   right: 0;
-  z-index: 1;
+  z-index: 2;
   background-color: rgb(64 165 2 / 70%);
 }
 

@@ -1,7 +1,7 @@
 <template>
-    <div class="aboutus position-relative ff_comfortaa bg_light_green text_dark_green lg_shadow">
+    <div class="aboutus position-relative ff_comfortaa bg_light_green text_dark_green lg_shadow"  id="rolunk">
         <div class="container-fluid p-5">
-            <h2 class="text-center text-2 mb-3">{{ msg }}</h2>
+            <h2 class="text-center text-2 mb-3 pt-5">{{ title }}</h2>
             <div class="row">
                 <div class="col-12 col-lg-6 order-2 order-lg-1">
                     <div class="aboutus_txt_container p-3 p-xl-5 fw_500">
@@ -24,7 +24,7 @@
 export default {
     name: 'AboutUs',
     props: {
-        msg: String
+        title: String
     }
 }
 </script>

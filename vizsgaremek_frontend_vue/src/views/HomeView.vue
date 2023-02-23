@@ -1,9 +1,9 @@
 <template>
   <div class="home">
     <HomeGreeting msg="Üdvözöljük a Pizzeria Toscana oldalán!"/>
-    <AboutUs msg="Éttermünk"/>
-    <HelpYou msg="Miben segíthetünk?"/>
-    <Contact msg="Hol talál meg minket?"/>
+    <AboutUs title="Éttermünk"/>
+    <HelpYou title="Miben segíthetünk?"/>
+    <Contact title="Hol talál meg minket?"/>
   </div>
 </template>
 

@@ -22,7 +22,7 @@ export default {
 <style scoped>
 
 .greeting {
-    height: 496px;
+    height: 420px;
 }
 .bg_img {
     background-size: cover;
