@@ -1,0 +1,30 @@
+get product / id
+get products
+put product /id
+delete product
+
+post activeorder / userid
+get orders / userid
+
+get commodities / típusid
+get commodity / id
+post commodity 
+put commodity / id
+delete commodity / id
+
+get orders 
+get order / id
+post order
+put order / id
+delete order / id
+
+----------------------
+
+post login / saltrequest /
+post login
+post logout
+
+post email
+
+
+
