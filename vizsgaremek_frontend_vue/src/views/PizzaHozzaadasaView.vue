@@ -1,5 +1,5 @@
 <template>
-    <div class="register mt-5">
+    <div class="pizza_hozzaadasa mt-5">
         <div class=" ff_comfortaa bg_light_green text_dark_green lg_shadow py-5">
 
             <div class="row">
@@ -8,43 +8,42 @@
 
                         <div class="p-5 pb-4 border-bottom-0">
                             <!-- <h1 class="modal-title fs-5" >Modal title</h1> -->
-                            <h1 class="fw-bold mb-4 fs-2 text-center">Regisztráció</h1>
+                            <h1 class="fw-bold mb-4 fs-2 text-center">Új pizza hozzáadása</h1>
                         </div>
 
                         <div class="p-5 pt-0">
                             <form class="">
                                 <div class="mb-5">
                                     <div class="form-floating">
-                                        <input type="text" class="form-control rounded-3 mb-3" id="floatingUserName"
-                                            placeholder="UserName" v-model="UserName" />
-                                        <label for="floatingUserName">Felhasználónév</label>
+                                        <input type="text" class="form-control rounded-3 mb-3" id="floatingName"
+                                            placeholder="Name" v-model="Name" />
+                                        <label for="floatingName">Név</label>
                                     </div>
                                     <div class="form-floating">
-                                        <input type="text" class="form-control rounded-3 mb-3" id="floatingEmail"
-                                            placeholder="Email" v-model="Email" />
-                                        <label for="floatingEmail">Email</label>
+                                        <input type="text" class="form-control rounded-3 mb-3" id="floatingOther"
+                                            placeholder="Other" v-model="Other" />
+                                        <label for="floatingOther">Összetevők</label>
                                     </div>
                                     <div class="form-floating">
-                                        <input type="text" class="form-control rounded-3 mb-3" id="floatingPassword"
-                                            placeholder="Password" v-model="Password" />
-                                        <label for="floatingPassword">Jelszó</label>
+                                        <input type="text" class="form-control rounded-3 mb-3" id="floatingUrl"
+                                            placeholder="Url" v-model="Url" />
+                                        <label for="floatingUrl">Kép</label>
                                     </div>
                                     <div class="form-floating">
-                                        <input type="text" class="form-control rounded-3 mb-3" id="floatingPasswordAgain"
-                                            placeholder="PasswordAgain" v-model="PasswordAgain" />
-                                        <label for="floatingPasswordAgain">Jelszó újra</label>
+                                        <input type="text" class="form-control rounded-3 mb-3" id="floatingActive"
+                                            placeholder="Active" v-model="Active" />
+                                        <label for="floatingActive">Aktív-e</label>
+                                    </div>
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control rounded-3 mb-3" id="floatingPrice"
+                                            placeholder="Price" v-model="Price" />
+                                        <label for="floatingPrice">Ár</label>
                                     </div>
                                     <hr class="my-4" />
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="DataPolicy">
-                                        <label class="form-check-label" for="DataPolicy">
-                                           Hozzájárulok a megadott adataimnak a szolgáltatás működtetéséhez szükséges tárolásához és felhasználásához.
-                                        </label>
-                                    </div>
                                 </div>
 
                                 <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="button"
-                                    @click="register(UserName)">
+                                    @click="pizzaHozzaadas(Name, Other, Url, Active, Price)">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                         class="bi bi-box-arrow-in-right" viewBox="0 0 16 16">
                                         <path fill-rule="evenodd"
@@ -52,7 +51,7 @@
                                         <path fill-rule="evenodd"
                                             d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z" />
                                     </svg>
-                                    Küldés
+                                    Hozzáadás
                                 </button>
 
                             </form>
@@ -67,28 +66,31 @@
 import axios from "axios";
 
 export default {
-    name: "RegisztracioView",
+    name: "PizzaHozzaadasaView",
     components: {},
 
     data() {
         return {
-            UserName: "",
-            Password: "",
-            PasswordAgain: "",
-            Email: "",
-            DataPolicy: "",
         };
     },
 
     methods: {
-        register(UserName) {
+        pizzaHozzaadas(Name, Other, Url, Active, Price) {
             axios
-                .post("https://localhost:5001/Register/" + UserName)
+                .post("https://localhost:5001/Product", {
+                    "prName": Name,
+                    "prSize": JSON.stringify({"0":"25","1":"35","2":"45"}),
+                    "prOther": Other,
+                    "coIds": "{}",
+                    "prUrl": Url,
+                    "prActive": Active,
+                    "prPrice": Price
+                })
                 .then((response) => {
                     if (response.status == 200) {
-                        alert("Registered successfully");
+                        alert("Mentés sikeres");
                     } else {
-                        alert("Registration failed");
+                        alert("Mentés nem sikerült");
                     }
                 })
                 .catch((error) => {
