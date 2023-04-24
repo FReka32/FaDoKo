@@ -82,7 +82,7 @@ export default {
 
     methods: {
         pizzaBeolvasasa() {
-            let url = "https://localhost:5001/Product" + this.pizzaId;
+            let url = "https://localhost:5001/Product/" + this.pizzaId;
             axios
                 .get(url)
                 .then((response) => {
@@ -99,7 +99,7 @@ export default {
         },
         pizzaModositas(Name, Other, Url, Active, Price) {
             axios
-                .put("https://localhost:5001/Product" + this.pizzaId, {
+                .put("https://localhost:5001/Product/" + this.pizzaId, {
                     "prName": Name,
                     "prSize": JSON.stringify({ "0": "25", "1": "35", "2": "45" }),
                     "prOther": Other,
@@ -110,7 +110,12 @@ export default {
                 })
                 .then((response) => {
                     if (response.status == 200) {
-                        alert("Mentés sikeres");
+                        if (confirm("Mentés sikeres. Végzett a módosítással és visszatér az Étlap oldalra?")) {
+                            document.getElementById('etlap_link').click();
+                        } else{
+                            //stay on page
+                        }
+                       
                     } else {
                         alert("Mentés nem sikerült");
                     }
@@ -123,9 +128,9 @@ export default {
     },
     mounted: function () {
         this.pizzaBeolvasasa();
-        console.log(this.$store.state.productId);
-        console.log(this.$store.state.logged);
-        console.log(this.$store.state.jogosultsag);
+        //console.log(this.$store.state.productId);
+        //console.log(this.$store.state.logged);
+        //console.log(this.$store.state.jogosultsag);
     },
 };
 </script>

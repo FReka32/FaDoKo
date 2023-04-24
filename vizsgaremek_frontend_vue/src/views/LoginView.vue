@@ -9,7 +9,7 @@
             <div class="p-5 pb-4 border-bottom-0">
               <!-- <h1 class="modal-title fs-5" >Modal title</h1> -->
               <h1 v-if="!logged" class="fw-bold mb-0 fs-2 text-center">Bejelentkezés</h1>
-              <h1 v-else class="fw-bold mb-0 fs-2 text-center">Kijelentkezés</h1>
+              <h1 v-else class="fw-bold mb-0 fs-2 text-center">Profil</h1>
             </div>
 
             <div class="p-5 pt-0">
@@ -224,7 +224,7 @@ export default {
     },
     refreshData() {
       if (this.$store.state.logged) {
-        document.getElementById("loginButton").innerHTML = "Kijelentkezés";
+        document.getElementById("loginButton").innerHTML = "Profil";
         document.getElementById("usersNavLink").classList.remove("d-none");
       } else {
         document.getElementById("loginButton").innerHTML = "Bejelentkezés";
