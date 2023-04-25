@@ -3,7 +3,7 @@
     <div class="bg_light_green text_dark_green mt-5">
       <div class="container-fluid p-5">
         <h1 class="text-center text-1 ff_comfortaa">Heti kedvencek</h1>
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        <div class="row mx-0 row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
           <div v-for="favProduct in favProducts" v-bind:key="favProducts.prId" class="col">
             <div class="card shadow-sm">
               <img class="img-fluid" :src="'data:image/jpeg;base64,' + favProduct.prUrl" width="500" height="225">
@@ -31,7 +31,7 @@
         <div class="album py-5 bg-body-tertiary">
           <div class="container">
 
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            <div class="row mx-0 row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
 
 
               <div v-for="product in products" v-bind:key="products.prId" class="col">
@@ -61,7 +61,7 @@
                     </div>
                     <div class="d-flex justify-content-between align-items-center">
                       <div v-if="jog == 9" class="btn-group">
-                        <router-link class="btn btn-sm btn-outline-secondary" to="/pizza-modositasa" @click="modifyClick(product.prId)"><svg
+                        <router-link class="btn btn-sm btn-outline-primary" to="/pizza-modositasa" @click="modifyClick(product.prId)"><svg
                             xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="bi bi-pencil" viewBox="0 0 16 16">
                             <path
@@ -147,7 +147,7 @@ export default {
           .then((response) => {
             if (response.status == 200) {
               alert(response.data);
-              location.reload()
+              this.pizzakBeolvasasa();
             } else {
               //alert(response.data);
             }

@@ -1,6 +1,6 @@
 <template>
     <div class="pizza_modositasa mt-5">
-        <div class=" ff_comfortaa bg_light_green text_dark_green lg_shadow py-5">
+        <div class=" ff_comfortaa bg_light_green text_dark_green lg_shadow py-5 w-100">
 
             <div class="row">
                 <div class="d-flex justify-content-center">
@@ -76,7 +76,6 @@ export default {
             Url: "",
             Active: "",
             Price: ""
-
         };
     },
 
@@ -88,10 +87,10 @@ export default {
                 .then((response) => {
                     this.pizza = response.data;
                     this.Name = this.pizza.prName,
-                        this.Other = this.pizza.prOther,
-                        this.Url = this.pizza.prUrl,
-                        this.Active = this.pizza.prActive,
-                        this.Price = this.pizza.prPrice
+                    this.Other = this.pizza.prOther,
+                    this.Url = this.pizza.prUrl,
+                    this.Active = this.pizza.prActive,
+                    this.Price = this.pizza.prPrice
                 })
                 .catch((error) => {
                     //alert(error);

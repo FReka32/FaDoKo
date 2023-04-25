@@ -225,10 +225,14 @@ export default {
     refreshData() {
       if (this.$store.state.logged) {
         document.getElementById("loginButton").innerHTML = "Profil";
-        document.getElementById("usersNavLink").classList.remove("d-none");
+        if (this.$store.state.jogosultsag === "9") {
+          document.getElementById("adminOrders").classList.remove("d-none");
+        }
+        document.getElementById("userOrders").classList.remove("d-none");
       } else {
         document.getElementById("loginButton").innerHTML = "Bejelentkezés";
-        document.getElementById("usersNavLink").classList.add("d-none");
+        document.getElementById("adminOrders").classList.remove("d-none");
+        document.getElementById("userOrders").classList.add("d-none");
       }
     },
   },

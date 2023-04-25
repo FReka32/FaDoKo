@@ -3,7 +3,7 @@
         <div class=" ff_comfortaa bg_light_green text_dark_green lg_shadow py-5">
 
 
-            <div class="row">
+            <div class="row mx-0">
                 <div class="d-flex justify-content-center">
                     <div class="col-6">
                         <div class="p-5 pb-4 border-bottom-0">
@@ -41,7 +41,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row my-5">
+            <div class="row mx-0 my-5">
                 <div class="d-flex justify-content-center">
                     <div class="col-12 col-md-6 col-lg-4">
                         <button class="mb-3 btn btn-lg rounded-3 btn-primary px-4 w-100" type="button">

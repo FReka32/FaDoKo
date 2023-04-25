@@ -20,8 +20,11 @@
             <!--li class="nav-item">
               <router-link class="nav-link" to="/#rolunk">Rólunk</router-link>
             </li-->
-            <li class="nav-item d-none" id="usersNavLink">
+            <li class="nav-item d-none" id="userOrders">
               <router-link to="/rendeles-kovetes" class="nav-link">Rendeléskövetés</router-link>
+            </li>
+			<li class="nav-item d-none" id="adminOrders">
+              <router-link to="/rendelesek" class="nav-link">Rendelések</router-link>
             </li>
             <!--li class="nav-item">
 							<router-link class="nav-link" to="/leltar">Leltár</router-link>
