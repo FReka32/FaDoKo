@@ -175,7 +175,6 @@ export default {
         });
     },
     rendelesMentes(orId, orData, name, address, phone, email, status) {
-
       if (orId === "") {
         //POST
         axios.post("https://localhost:5001/Order", {
@@ -184,7 +183,8 @@ export default {
           "address": address,
           "phone": phone,
           "email": email,
-          "status": status
+          "status": status,
+          "logDate": new Date().toISOString(),
         })
           .then((response) => {
             if (response.status == 200) {
@@ -209,7 +209,8 @@ export default {
             "address": address,
             "phone": phone,
             "email": email,
-            "status": status
+            "status": status,
+            "logDate": new Date().toISOString(),
           })
           .then((response) => {
             if (response.status == 200) {
