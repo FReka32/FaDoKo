@@ -2,7 +2,7 @@
     <div class="aboutus position-relative ff_comfortaa bg_light_green text_dark_green lg_shadow"  id="rolunk">
         <div class="container-fluid p-5">
             <h2 class="text-center text-2 mb-3 pt-5">{{ title }}</h2>
-            <div class="row">
+            <div class="row mx-0">
                 <div class="col-12 col-lg-6 order-2 order-lg-1">
                     <div class="aboutus_txt_container p-3 p-xl-5 fw_500">
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eget laoreet ligula. Proin in tortor tortor. Aenean consequat ullamcorper ultrices. Fusce eget magna quis mauris tincidunt ultricies. at, porttitor mauris id, tincidunt quam. Vestibulum accumsan justo ex, nec convallis ex sagittis a. Morbi a elit feugi Pellentesque feugiat hendrerit lectus, aliquam lobortis massa interdum hendrerit.</p>

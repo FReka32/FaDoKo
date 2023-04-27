@@ -1,55 +1,32 @@
 <template>
-  <div class="d-flex flex-column justify-content-between h-100 bg_light_green">
-    <nav class="navbar navbar-expand-lg ff_comfortaa position-fixed">
-      <div class="menu">
-        <button class="navbar-toggler mx-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler"
-          aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarToggler">
-          <ul class="navbar-nav me-auto my-2 mx-3">
-            <li class="nav-item">
-              <router-link class="nav-link" aria-current="page" to="/">Főoldal</router-link>
-            </li>
-            <li class="nav-item">
-              <router-link class="nav-link" to="/etlap">Étlap</router-link>
-            </li>
-            <!--li class="nav-item">
-              <router-link class="nav-link" to="/#kapcsolat">Kapcsolat</router-link>
-            </li-->
-            <!--li class="nav-item">
-              <router-link class="nav-link" to="/#rolunk">Rólunk</router-link>
-            </li-->
-            <li class="nav-item d-none" id="userOrders">
-              <router-link to="/rendeles-kovetes" class="nav-link">Rendeléskövetés</router-link>
-            </li>
-			<li class="nav-item d-none" id="adminOrders">
-              <router-link to="/rendelesek" class="nav-link">Rendelések</router-link>
-            </li>
-            <!--li class="nav-item">
-							<router-link class="nav-link" to="/leltar">Leltár</router-link>
-						</li>-->
-            
-            <li>
-              <router-link class="nav-link" to="/kosar">
-				<div class="d-flex align-items-center"><div class="pe-1"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                  fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
-                  <path
-                    d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
-                </svg></div> <div>Kosár</div></div></router-link>
-            </li>
-			<li class="nav-item">
-              <form class="d-flex" role="search">
-                <router-link id="loginButton" class="nav-link" to="/Login">Bejelentkezés</router-link>
-              </form>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div class="logo logo_header mx-3">
-        <svg fill="#ffe59b" height="50" width="50" version="1.1" id="pizza_logo" xmlns="http://www.w3.org/2000/svg"
-          xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 448.898 448.898" xml:space="preserve">
-          <path id="XMLID_1423_" d="M110.646,307.839c0,3.866-3.134,7-7,7h-1.866c-3.866,0-7-3.134-7-7s3.134-7,7-7h1.866
+	<div class="d-flex flex-column justify-content-between h-100 bg_light_green">
+		<nav class="navbar navbar-expand-lg ff_comfortaa position-fixed">
+			<div class="menu">
+				<button class="navbar-toggler mx-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler"
+					aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarToggler">
+					<ul class="navbar-nav me-auto my-2 mx-3">
+						<li class="nav-item">
+							<router-link class="nav-link" id="homePage" aria-current="page" to="/">Főoldal</router-link>
+						</li>
+						<li class="nav-item">
+							<router-link class="nav-link" to="/etlap">Étlap</router-link>
+						</li>
+						<li class="nav-item d-none" id="adminOrders">
+							<router-link to="/rendelesek" class="nav-link">Rendelések</router-link>
+						</li>
+						<li class="nav-item">
+							<router-link id="loginButton" class="nav-link" to="/Login">Bejelentkezés</router-link>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="logo logo_header mx-3">
+				<svg fill="#ffe59b" height="50" width="50" version="1.1" id="pizza_logo" xmlns="http://www.w3.org/2000/svg"
+					xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 448.898 448.898" xml:space="preserve">
+					<path id="XMLID_1423_" d="M110.646,307.839c0,3.866-3.134,7-7,7h-1.866c-3.866,0-7-3.134-7-7s3.134-7,7-7h1.866
   	C107.512,300.839,110.646,303.973,110.646,307.839z M67.648,243.445h-1.865c-3.866,0-7,3.134-7,7s3.134,7,7,7h1.865
   	c3.866,0,7-3.134,7-7S71.515,243.445,67.648,243.445z M135.299,186.951h-1.867c-3.866,0-7,3.134-7,7c0,3.866,3.134,7,7,7h1.867
   	c3.866,0,7-3.134,7-7C142.299,190.084,139.165,186.951,135.299,186.951z M178.345,95.274h-1.864c-3.866,0-7,3.134-7,7
@@ -106,21 +83,27 @@
   	c-12.365,0-22.425-10.06-22.425-22.426s10.06-22.426,22.425-22.426C129.012,239.714,139.072,249.774,139.072,262.14z
   	 M125.072,262.14c0-4.646-3.78-8.426-8.427-8.426c-4.646,0-8.425,3.78-8.425,8.426s3.779,8.426,8.425,8.426
   	C121.292,270.565,125.072,266.786,125.072,262.14z" />
-        </svg>
-      </div>
-    </nav>
-    <router-view></router-view>
-    <footer id="main_footer" class="py-4 ff_comfortaa">
-      <div class="
+				</svg>
+			</div>
+		</nav>
+
+
+		<router-view></router-view>
+
+
+
+		<footer id="main_footer" class="py- ff_comfortaa">
+			<div class="
             container-fluid
             d-flex
             flex-column flex-sm-row
             align-items-center
           ">
-        <div class="logo m-4">
-          <svg fill="#ffc00f" height="70" width="70" version="1.1" id="pizza_logo" xmlns="http://www.w3.org/2000/svg"
-            xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 448.898 448.898" xml:space="preserve">
-            <path id="XMLID_1423_" d="M110.646,307.839c0,3.866-3.134,7-7,7h-1.866c-3.866,0-7-3.134-7-7s3.134-7,7-7h1.866
+				<div class="logo m-4">
+					<svg fill="#ffc00f" height="70" width="70" version="1.1" id="pizza_logo"
+						xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+						viewBox="0 0 448.898 448.898" xml:space="preserve">
+						<path id="XMLID_1423_" d="M110.646,307.839c0,3.866-3.134,7-7,7h-1.866c-3.866,0-7-3.134-7-7s3.134-7,7-7h1.866
   	C107.512,300.839,110.646,303.973,110.646,307.839z M67.648,243.445h-1.865c-3.866,0-7,3.134-7,7s3.134,7,7,7h1.865
   	c3.866,0,7-3.134,7-7S71.515,243.445,67.648,243.445z M135.299,186.951h-1.867c-3.866,0-7,3.134-7,7c0,3.866,3.134,7,7,7h1.867
   	c3.866,0,7-3.134,7-7C142.299,190.084,139.165,186.951,135.299,186.951z M178.345,95.274h-1.864c-3.866,0-7,3.134-7,7
@@ -177,81 +160,67 @@
   	c-12.365,0-22.425-10.06-22.425-22.426s10.06-22.426,22.425-22.426C129.012,239.714,139.072,249.774,139.072,262.14z
   	 M125.072,262.14c0-4.646-3.78-8.426-8.427-8.426c-4.646,0-8.425,3.78-8.425,8.426s3.779,8.426,8.425,8.426
   	C121.292,270.565,125.072,266.786,125.072,262.14z" />
-          </svg>
-        </div>
-        <div class="footer_menu_container d-flex justify-content-center w-100">
-          <ul class="
+					</svg>
+				</div>
+				<div class="footer_menu_container d-flex justify-content-center w-100">
+					<ul class="
                 navbar-nav
                 d-flex
                 flex-column flex-sm-row
                 justify-content-center
                 align-items-center
               ">
-            <li class="nav-item py-2 px-3">
-              <router-link class="nav-link" to="/etlap" id="etlap_link">Étlap</router-link>
-            </li>
-            <li class="nav-item py-2 px-3">
-              <router-link class="nav-link" to="/kosar">
-				<div class="d-flex align-items-center"><div class="pe-1"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                  fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
-                  <path
-                    d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
-                </svg></div> <div>Kosár</div></div></router-link>
-            </li>
-            <!--li class="nav-item py-2 px-3">
-              <router-link class="nav-link" to="/#kapcsolat">Kapcsolat</router-link>
-            </li>
-            <li class="nav-item py-2 px-3">
-              <router-link class="nav-link" to="/#rolunk">Rólunk</router-link>
-            </li-->
-          </ul>
-        </div>
-      </div>
-    </footer>
-  </div>
+						<li class="nav-item mt-3">
+							<p class="nav-link">© 2023 FADOKO</p>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</footer>
+	</div>
 </template>
 
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&family=Homemade+Apple&family=Poiret+One&display=swap");
 
 .navbar {
-  box-shadow: 0 0 2rem rgb(0 0 0 / 45%) !important;
-  min-height: 80px;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 2;
-  background-color: rgb(64 165 2 / 70%);
+	box-shadow: 0 0 2rem rgb(0 0 0 / 45%) !important;
+	min-height: 80px;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 2;
+	background-color: rgb(64 165 2 / 70%);
 }
 
 .navbar:hover {
-  background-color: rgb(64 165 2 / 100%);
+	background-color: rgb(64 165 2 / 100%);
 }
 
 .logo_header {
-  position: absolute;
-  right: 0;
-  top: 1rem;
+	position: absolute;
+	right: 0;
+	top: 1rem;
 }
 
 .ff_homemadeapple {
-  font-family: "Homemade Apple", cursive;
+	font-family: "Homemade Apple", cursive;
 }
 
 .ff_comfortaa {
-  font-family: "Comfortaa", cursive;
+	font-family: "Comfortaa", cursive;
 }
 
 .ff_poiretone {
-  font-family: "Poiret One", cursive;
+	font-family: "Poiret One", cursive;
 }
 
 #main_footer {
-  background-color: rgb(39 100 2);
-  color: #ffc00f;
+	background-color: rgb(39 100 2);
+	color: #ffc00f;
 }
 
 #main_footer a.nav-link:hover {
-  color: #ffe59b;
+	color: #ffe59b;
 }
 </style>

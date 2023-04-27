@@ -2,7 +2,7 @@
   <div class="login mt-5">
     <div class=" ff_comfortaa bg_light_green text_dark_green lg_shadow py-5">
 
-      <div class="row">
+      <div class="row mx-0">
         <div class="d-flex justify-content-center">
           <div class="col-12 col-md-6 col-lg-4 mx-auto">
 

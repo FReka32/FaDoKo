@@ -232,7 +232,7 @@ export default {
 
     },
     rendelesTorlese(rendeles) {
-      if (confirm('Biztosan törölni akarja ezt a pizzát?\nID: ' + rendeles.orId + '\nNév: ' + rendeles.name + '\nDátum: ' + rendeles.logDate)) {
+      if (confirm('Biztosan törölni akarja ezt a rendelést?\nID: ' + rendeles.orId + '\nNév: ' + rendeles.name + '\nDátum: ' + rendeles.logDate)) {
         let url = "https://localhost:5001/Order/" + rendeles.orId;
         axios
           .delete(url)

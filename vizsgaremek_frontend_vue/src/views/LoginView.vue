@@ -1,41 +1,130 @@
 <template>
   <div class="login mt-5">
     <div class=" ff_comfortaa bg_light_green text_dark_green lg_shadow py-5">
+      <!-- <h1 class="modal-title fs-5" >Modal title</h1> -->
+      <h1 v-if="!logged" class="fw-bold fs-2 text-center">Bejelentkezés</h1>
+      <h1 v-else class="fw-bold fs-2 text-center">Admin</h1>
+      <div class="row mx-0">
 
-      <div class="row">
-        <div class="d-flex justify-content-center">
-          <div class="col-12 col-md-6 col-lg-4">
-
-            <div class="p-5 pb-4 border-bottom-0">
-              <!-- <h1 class="modal-title fs-5" >Modal title</h1> -->
-              <h1 v-if="!logged" class="fw-bold mb-0 fs-2 text-center">Bejelentkezés</h1>
-              <h1 v-else class="fw-bold mb-0 fs-2 text-center">Profil</h1>
+        <div class="col-10 offset-1">
+          <div v-if="logged">
+            <div class="py-5 my-3">
+              <table class="table table-striped helpyou_table text_dark_green ff_comfortaa">
+                <thead class="thead-dark">
+                  <tr>
+                    <th>ID</th>
+                    <th>Név</th>
+                    <th>Jogosultság</th>
+                    <th>E-mail</th>
+                    <th>Telefon</th>
+                    <th>Aktív</th>
+                    <th>Műveletek</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="felhasznalo in felhasznalok" v-bind:key="felhasznalo.id" :id="felhasznalo.adId">
+                    <td>{{ felhasznalo.adId }}</td>
+                    <td>{{ felhasznalo.adName }}</td>
+                    <td>{{ felhasznalo.adPermission }}</td>
+                    <td>{{ felhasznalo.adEmail }}</td>
+                    <td>{{ felhasznalo.adPhone }}</td>
+                    <td>{{ felhasznalo.active }}</td>
+                    <td class="text-center">
+                    <button class="btn btn-sm btn-outline-primary me-1"
+                      @click="felhasznaloBeolvasasa(felhasznalo.adId)"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+                        height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+                        <path
+                          d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z" />
+                      </svg></button>
+                    <button type="button" class="btn btn-sm btn-outline-danger" @click="felhasznaloTorlese(felhasznalo)"><svg
+                        xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash"
+                        viewBox="0 0 16 16">
+                        <path
+                          d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z" />
+                        <path
+                          d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z" />
+                      </svg></button>
+                  </td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
-
-            <div class="p-5 pt-0">
-              <form class="">
-                <div v-if="!logged">
-                  <div class="form-floating mb-3">
-                    <input type="text" class="form-control rounded-3" id="floatingInput" placeholder="UserName"
-                      v-model="FelhasznaloNeve" />
-
-
-
-
-
-                    <label for="floatingInput">Felhasználónév</label>
+            <div class=" mt-5 col-12 col-md-6 offset-md-3 col-xl-4 offset-xl-4">
+              <h2 class="fw-bold mb-4 fs-4 text-center">Módosítás</h2>
+              <div class="p-5 pt-0">
+                <form class="" id="modositasForm">
+                  <div class="mb-5">
+                    <div class="form-floating">
+                      <input type="text" class="form-control rounded-3 mb-3" id="floatingAdId" placeholder="AdId"
+                        v-model="this.adId" disabled />
+                      <label for="floatingAdId">ID</label>
+                    </div>
+                    <div class="form-floating">
+                      <input type="text" class="form-control rounded-3 mb-3" id="floatingAdName" placeholder="AdName"
+                        v-model="this.adName" />
+                      <label for="floatingAdName">Név</label>
+                    </div>
+                    <div class="form-floating">
+                      <input type="text" class="form-control rounded-3 mb-3" id="floatingAdPermission"
+                        placeholder="AdPermission" v-model="this.adPermission" />
+                      <label for="floatingAdPermission">Jogosultság</label>
+                    </div>
+                    <div class="form-floating">
+                      <input type="text" class="form-control rounded-3 mb-3" id="floatingAdEmail" placeholder="AdEmail"
+                        v-model="this.adEmail" />
+                      <label for="floatingAdEmail">E-mail</label>
+                    </div>
+                    <div class="form-floating">
+                      <input type="text" class="form-control rounded-3 mb-3" id="floatingAdPhone" placeholder="AdPhone"
+                        v-model="this.adPhone" />
+                      <label for="floatingAdPhone">Telefon</label>
+                    </div>
+                    <div class="form-floating">
+                      <input type="text" class="form-control rounded-3 mb-3" id="floatingActive" placeholder="active"
+                        v-model="this.active" />
+                      <label for="floatingActive">Aktív</label>
+                    </div>
+                    <div class="form-floating">
+                      <input type="text" class="form-control rounded-3 mb-3" id="floatingPassword" placeholder="Password"
+                        v-model="Password" />
+                      <label for="floatingPassword">Jelszó</label>
+                    </div>
                   </div>
-                  <div class="form-floating mb-3">
-                    <input type="password" class="form-control rounded-3" id="floatingPassword" placeholder="Password"
-                      v-model="Password" />
-
-
-
-
-
-                    <label for="floatingPassword">Jelszó</label>
-                  </div>
+                  <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="button"
+                    @click="felhasznaloMentes(adId,adName, adPermission, adEmail, adPhone, active, Password)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-save"
+                      viewBox="0 0 16 16">
+                      <path
+                        d="M2 1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H9.5a1 1 0 0 0-1 1v7.293l2.646-2.647a.5.5 0 0 1 .708.708l-3.5 3.5a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L7.5 9.293V2a2 2 0 0 1 2-2H14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h2.5a.5.5 0 0 1 0 1H2z" />
+                    </svg>
+                    Mentés
+                  </button>
+                  <button class="w-100 mb-2 btn btn-lg rounded-3 btn-outline-primary" type="button"
+                    @click="felhasznaloMegse()">
+                    Mégse
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-12 col-md-6 offset-md-3 col-lg-4 offset-md-4">
+          <div class="p-5 pt-0">
+            <form class="">
+              <div v-if="!logged">
+                <div class="form-floating mb-3">
+                  <input type="text" class="form-control rounded-3" id="floatingInput" placeholder="UserName"
+                    v-model="FelhasznaloNeve" />
+                  <label for="floatingInput">Felhasználónév</label>
                 </div>
+                <div class="form-floating mb-3">
+                  <input type="password" class="form-control rounded-3" id="floatingPassword" placeholder="Password"
+                    v-model="Password" />
+                  <label for="floatingPassword">Jelszó</label>
+                </div>
+              </div>
+              <div class="d-flex justify-content-center">
                 <button v-if="!logged" class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="button"
                   @click="loginClick(FelhasznaloNeve, Password)">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -61,7 +150,7 @@
                   </svg>
                   Bejelentkezés
                 </button>
-                <button v-else class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="button" @click="logoutClick()">
+                <button v-else class="mb-2 btn btn-lg rounded-3 btn-primary" type="button" @click="logoutClick()">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                     class="bi bi-box-arrow-right" viewBox="0 0 16 16">
                     <path fill-rule="evenodd"
@@ -86,48 +175,11 @@
                   </svg>
                   Kijelentkezés
                 </button>
-                <hr class="my-4" />
-
-                <div v-if="!logged">
-                  <div class="w-100 py-2 mb-2">
-                    <router-link class="nav-link text-underline text-center" to="/regisztracio"><svg
-                        xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                        class="bi bi-person-add" viewBox="0 0 16 16">
-                        <path
-                          d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0Zm-2-6a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z" />
-                        <path
-                          d="M8.256 14a4.474 4.474 0 0 1-.229-1.004H3c.001-.246.154-.986.832-1.664C4.484 10.68 5.711 10 8 10c.26 0 .507.009.74.025.226-.341.496-.65.804-.918C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4s1 1 1 1h5.256Z" />
-                      </svg> Regisztráció</router-link>
-                  </div>
-
-                  <div class="w-100 py-2 mb-2">
-                    <router-link class="nav-link text-underline text-center" to="/elfelejtett-jelszo"><svg
-                        xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-unlock"
-                        viewBox="0 0 16 16">
-                        <path
-                          d="M11 1a2 2 0 0 0-2 2v4a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h5V3a3 3 0 0 1 6 0v4a.5.5 0 0 1-1 0V3a2 2 0 0 0-2-2zM3 8a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V9a1 1 0 0 0-1-1H3z" />
-                      </svg> Elfelejtett jelszó</router-link>
-                  </div>
-
-                </div>
-                <div v-else>
-                  <div class="w-100 py-2 mb-2">
-                    <router-link class="nav-link text-underline text-center" to="/jelszo-modositasa"><svg
-                        xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-unlock"
-                        viewBox="0 0 16 16">
-                        <path
-                          d="M11 1a2 2 0 0 0-2 2v4a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h5V3a3 3 0 0 1 6 0v4a.5.5 0 0 1-1 0V3a2 2 0 0 0-2-2zM3 8a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V9a1 1 0 0 0-1-1H3z" />
-                      </svg>Jelszó megváltoztatása</router-link>
-                  </div>
-                </div>
-                <!--button class="w-100 py-2 mb-2 btn btn-outline-warning rounded-3" type="submit">
-                <svg class="bi me-1" width="16" height="16"><use xlink:href="#github"/></svg>
-                Jelszó csere
-              </button-->
-              </form>
-            </div>
+              </div>
+            </form>
           </div>
         </div>
+
 
       </div>
 
@@ -152,14 +204,20 @@ export default {
       FelhasznaloNeve: "",
       Password: "",
       logged: this.$store.state.logged,
-      jog: this.$store.state.jogosultsag
+      jog: this.$store.state.jogosultsag,
+      felhasznalok: [],
+      felhasznalo:"",
+      adId: "",
+      adName: "",
+      adPermission: "",
+      adEmail: "",
+      adPhone: "",
+      active: 0,
+      password: "",
     };
   },
 
   methods: {
-    closeClick() {
-      this.$router.push("/");
-    },
     logoutClick() {
       let url = "https://localhost:5001/Logout/" + this.$store.state.Uid;
       //console.log(url);
@@ -201,40 +259,153 @@ export default {
               this.$store.state.Uid = response.data[0];
               this.$store.state.userName = response.data[1];
               this.$store.state.jogosultsag = response.data[2];
-              //console.log(this.$store.state.Uid);
-              //console.log(this.$store.state.userName);
-              //console.log(this.$store.state.jogosultsag);
               if (response.status == 200) {
                 this.$store.state.logged = true;
+                alert("Sikeres bejelentkezés: " + this.$store.state.userName);
                 this.refreshData();
-                this.closeClick();
-                //alert("Sikeres bejelentkezés: " + this.$store.state.userName);
               } else {
-                //alert(this.$store.state.Uid);
+                alert(this.$store.state.Uid);
               }
             })
             .catch((error) => {
-              //alert("Hiba történt:\n" + error.message);
+              alert("Hiba történt:\n" + error.message);
             });
         })
         .catch((error) => {
           //console.log(error);
-          //alert("Hiba történt:\n" + error.message);
+          alert("Hiba történt:\n" + error.message);
         });
     },
     refreshData() {
       if (this.$store.state.logged) {
-        document.getElementById("loginButton").innerHTML = "Profil";
+        document.getElementById("loginButton").innerHTML = "Admin";
         if (this.$store.state.jogosultsag === "9") {
           document.getElementById("adminOrders").classList.remove("d-none");
         }
-        document.getElementById("userOrders").classList.remove("d-none");
+        document.getElementById('homePage').click();
       } else {
         document.getElementById("loginButton").innerHTML = "Bejelentkezés";
         document.getElementById("adminOrders").classList.remove("d-none");
-        document.getElementById("userOrders").classList.add("d-none");
       }
     },
+    felhasznalokBeolvasasa() {
+      let url = "https://localhost:5001/Admin";
+      axios
+        .get(url)
+        .then((response) => {
+          this.felhasznalok = response.data;
+          //console.log(this.felhasznalok);
+        })
+        .catch((error) => {
+          //alert(error);
+        });
+    },
+    felhasznaloBeolvasasa(adId) {
+      let url = "https://localhost:5001/Admin/" + adId;
+      axios
+        .get(url)
+        .then((response) => {
+          this.felhasznalo = response.data;
+          this.adId = this.felhasznalo.adId;
+          this.adName = this.felhasznalo.adName;
+          this.adPermission = this.felhasznalo.adPermission;
+          this.adEmail = this.felhasznalo.adEmail;
+          this.adPhone = this.felhasznalo.adPhone;
+          this.active = this.felhasznalo.active;
+          const element = document.getElementById("modositasForm");
+          element.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
+        })
+        .catch((error) => {
+          //alert(error);
+        });
+    },
+    felhasznaloMentes(adId,adName, adPermission, adEmail, adPhone, active, password) {
+      if (adId === "") {
+        //POST
+        axios.post("https://localhost:5001/Admin", {
+          "adName": adName,
+          "adPermission": adPermission,
+          "adEmail": adEmail,
+          "adPhone": adPhone,
+          "active": active,
+          "salt": "hyD7KTz06AdOpATFk7KWycl2NRYH0AQuTmoEfFdcsyiZki1xysuMLmPoBBH52rR6",
+          "hash": "7fdfcacc1bbc99a48778a18770ae72321a12e54417a05f1f8296368f4265e35d"
+        })
+          .then((response) => {
+            if (response.status == 200) {
+              alert("Mentés sikeres");
+              this.felhasznalokBeolvasasa();
+              const element = document.getElementById(adId);
+              element.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
+            } else {
+              alert("Mentés nem sikerült");
+            }
+          })
+          .catch((error) => {
+            //console.log(error);
+            alert("Hiba történt:\n" + error.message);
+          });
+      } else {
+        //PUT
+        axios
+          .put("https://localhost:5001/Admin/" + adId, {
+            "adName": adName,
+            "adPermission": adPermission,
+            "adEmail": adEmail,
+            "adPhone": adPhone,
+            "active": active
+          })
+          .then((response) => {
+            if (response.status == 200) {
+              alert("Mentés sikeres");
+              this.felhasznalokBeolvasasa();
+              const element = document.getElementById(adId);
+              element.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
+
+            } else {
+              alert("Mentés nem sikerült");
+            }
+          })
+          .catch((error) => {
+            //console.log(error);
+            alert("Hiba történt:\n" + error.message);
+          });
+      }
+
+
+    },
+    felhasznaloTorlese(felhasznalo) {
+      if (confirm('Biztosan törölni akarja ezt a felhasználót?\nID: ' + felhasznalo.adId + '\nNév: ' + felhasznalo.adName)) {
+        let url = "https://localhost:5001/Admin/" + felhasznalo.adId;
+        axios
+          .delete(url)
+          .then((response) => {
+            if (response.status == 200) {
+              alert(response.data);
+              this.felhasznalokBeolvasasa();
+            } else {
+              //alert(response.data);
+            }
+          })
+          .catch((error) => {
+            //console.log(error);
+          });
+      } else {
+        // Do nothing!
+      }
+
+    },
+    felhasznaloMegse() {
+      this.adName = "",
+        this.adPermission = "",
+        this.adEmail = "",
+        this.adPhone = "",
+        this.active = 0,
+        this.password = ""
+    }
+  },
+  mounted: function () {
+    this.felhasznalokBeolvasasa();
   },
 };
 </script>
