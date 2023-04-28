@@ -1,6 +1,6 @@
 <template>
     <div class="pizza_modositasa mt-5">
-        <div class=" ff_comfortaa bg_light_green text_dark_green lg_shadow py-5 w-100">
+        <div class=" ff_comfortaa  bg_light_green text_dark_green lg_shadow py-5 w-100">
 
             <div class="row mx-0">
                 <div class="d-flex justify-content-center">
@@ -110,7 +110,7 @@ export default {
                 .then((response) => {
                     if (response.status == 200) {
                         if (confirm("Mentés sikeres. Végzett a módosítással és visszatér az Étlap oldalra?")) {
-                            document.getElementById('etlap_link').click();
+                            document.getElementById('etlapLink').click();
                         } else{
                             //stay on page
                         }

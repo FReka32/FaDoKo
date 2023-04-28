@@ -1,6 +1,6 @@
 <template>
 	<div class="d-flex flex-column justify-content-between h-100 bg_light_green">
-		<nav class="navbar navbar-expand-lg ff_comfortaa position-fixed">
+		<nav class="navbar navbar-expand-lg ff_comfortaa  position-fixed">
 			<div class="menu">
 				<button class="navbar-toggler mx-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler"
 					aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
@@ -12,13 +12,13 @@
 							<router-link class="nav-link" id="homePage" aria-current="page" to="/">Főoldal</router-link>
 						</li>
 						<li class="nav-item">
-							<router-link class="nav-link" to="/etlap">Étlap</router-link>
+							<router-link class="nav-link" id="etlapLink" to="/etlap">Étlap</router-link>
 						</li>
 						<li class="nav-item d-none" id="adminOrders">
 							<router-link to="/rendelesek" class="nav-link">Rendelések</router-link>
 						</li>
 						<li class="nav-item">
-							<router-link id="loginButton" class="nav-link" to="/Login">Bejelentkezés</router-link>
+							<router-link id="adminButton" class="nav-link" to="/Login">Admin</router-link>
 						</li>
 					</ul>
 				</div>
@@ -92,7 +92,7 @@
 
 
 
-		<footer id="main_footer" class="py- ff_comfortaa">
+		<footer id="main_footer" class="py- ff_comfortaa ">
 			<div class="
             container-fluid
             d-flex
@@ -181,7 +181,7 @@
 </template>
 
 <style>
-@import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&family=Homemade+Apple&family=Poiret+One&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap");
 
 .navbar {
 	box-shadow: 0 0 2rem rgb(0 0 0 / 45%) !important;
@@ -201,10 +201,6 @@
 	position: absolute;
 	right: 0;
 	top: 1rem;
-}
-
-.ff_homemadeapple {
-	font-family: "Homemade Apple", cursive;
 }
 
 .ff_comfortaa {

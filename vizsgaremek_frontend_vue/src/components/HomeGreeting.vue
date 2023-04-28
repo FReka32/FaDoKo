@@ -3,7 +3,7 @@
         <div class="bg_img home_greeting position-absolute"></div>
         <div class="mask position-absolute"></div>
         <div class="container-fluid p-5 position-absolute main_h1_container">
-            <h1 class="text-center text-1 text-main ff_homemadeapple">{{ msg }}</h1>
+            <h1 class="text-center text-main ff_comfortaa ">{{ msg }}</h1>
         </div>
     </div>
 </template>

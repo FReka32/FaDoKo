@@ -3,7 +3,7 @@
     <HomeGreeting msg="Felhasználók adatai" />
     <div class="container">
       <div class="py-5 my-3">
-        <table class="table table-striped helpyou_table text_dark_green ff_comfortaa">
+        <table class="table table-striped helpyou_table text_dark_green ff_comfortaa ">
           <thead class="thead-dark">
             <tr>
               <th>ID</th>

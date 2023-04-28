@@ -1,5 +1,6 @@
 html, body, #app{
     height: 100%;
+    --bs-body-font-size:14px;
 }
 .navbar {
     --bs-navbar-color: #ffe59b;
@@ -37,6 +38,19 @@ html, body, #app{
     --bs-btn-active-border-color: rgb(39 100 2);
     --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
     --bs-gradient: none;
+}
+.btn-secondary {
+    --bs-btn-color: rgb(39 100 2);
+    --bs-btn-bg: #ffe59b;
+    --bs-btn-border-color: #ffe59b;
+    --bs-btn-hover-color: rgb(39 100 2);
+    --bs-btn-hover-bg: #ffe59b;
+    --bs-btn-hover-border-color: rgb(39 100 2);
+    --bs-btn-focus-shadow-rgb: 49, 132, 253;
+    --bs-btn-active-color: rgb(39 100 2);
+    --bs-btn-active-bg: #ffe59b;
+    --bs-btn-active-border-color: #ffe59b;
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
 }
 .text_dark_green{
     color:rgb(39 100 2);

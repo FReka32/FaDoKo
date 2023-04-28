@@ -1,6 +1,6 @@
 <template>
   <div class="rendelesek mt-5">
-    <div class=" ff_comfortaa bg_light_green text_dark_green lg_shadow py-5">
+    <div class=" ff_comfortaa  bg_light_green text_dark_green lg_shadow py-5">
       <div class="p-5 pb-4 border-bottom-0">
         <!-- <h1 class="modal-title fs-5" >Modal title</h1> -->
         <h1 class="fw-bold mb-4 fs-2 text-center" id="pageTop">Rendelések</h1>
@@ -8,7 +8,7 @@
       <div class="row mx-0">
         <div class="col-10 offset-1">
           <div class="p-2 p-lg-5 pt-0 horizontal-scroll" >
-            <table class="table table-striped helpyou_table text_dark_green ff_comfortaa">
+            <table class="table table-striped helpyou_table text_dark_green ff_comfortaa ">
               <thead class="thead-dark">
                 <tr>
                   <th>Rendelés azonosító</th>

@@ -1,6 +1,6 @@
 <template>
     <div class="pizza_hozzaadasa mt-5">
-        <div class=" ff_comfortaa bg_light_green text_dark_green lg_shadow py-5">
+        <div class=" ff_comfortaa  bg_light_green text_dark_green lg_shadow py-5">
 
             <div class="row mx-0">
                 <div class="d-flex justify-content-center">
@@ -89,6 +89,7 @@ export default {
                 .then((response) => {
                     if (response.status == 200) {
                         alert("Mentés sikeres");
+                        document.getElementById('etlapLink').click();
                     } else {
                         alert("Mentés nem sikerült");
                     }
