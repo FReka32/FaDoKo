@@ -34,6 +34,7 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
     name: 'Pizza',
     props: {
@@ -43,6 +44,26 @@ export default {
     methods: {
         modifyClick(id) {
             this.$store.state.productId = id;
+        },
+        pizzakBeolvasasa() {
+            let url = "https://localhost:5001/Product";
+            axios
+                .get(url)
+                .then((response) => {
+                    this.$store.state.products = response.data;
+                    //console.log(this.products);
+                    for (let i = 0; i < 4; i++) {
+                        this.favProducts.push(this.$store.state.products[i + i * 2]);
+                    }
+                    for (let i = 0; i < this.$store.state.products.length; i++) {
+                        this.$store.state.products[i].prSize = JSON.parse(this.$store.state.products[i].prSize);
+                    }
+
+
+                })
+                .catch((error) => {
+                    //alert(error);
+                });
         },
         deleteClick(product) {
             if (confirm('Biztosan törölni akarja ezt a pizzát?\nID: ' + product.prId + '\nNév: ' + product.prName)) {

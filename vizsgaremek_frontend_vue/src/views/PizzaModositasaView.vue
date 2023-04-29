@@ -96,6 +96,26 @@ export default {
                     //alert(error);
                 });
         },
+        pizzakBeolvasasa() {
+            let url = "https://localhost:5001/Product";
+            axios
+                .get(url)
+                .then((response) => {
+                    this.$store.state.products = response.data;
+                    //console.log(this.products);
+                    for (let i = 0; i < 4; i++) {
+                        this.favProducts.push(this.$store.state.products[i + i * 2]);
+                    }
+                    for (let i = 0; i < this.$store.state.products.length; i++) {
+                        this.$store.state.products[i].prSize = JSON.parse(this.$store.state.products[i].prSize);
+                    }
+
+
+                })
+                .catch((error) => {
+                    //alert(error);
+                });
+        },
         pizzaModositas(Name, Other, Url, Active, Price) {
             axios
                 .put("https://localhost:5001/Product/" + this.pizzaId, {
@@ -110,6 +130,7 @@ export default {
                 .then((response) => {
                     if (response.status == 200) {
                         if (confirm("Mentés sikeres. Végzett a módosítással és visszatér az Étlap oldalra?")) {
+                            this.pizzakBeolvasasa();
                             document.getElementById('etlapLink').click();
                         } else{
                             //stay on page

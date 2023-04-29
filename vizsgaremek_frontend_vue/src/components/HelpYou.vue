@@ -1,6 +1,6 @@
 <template>
     <div class="helpyou position-relative ff_comfortaa  bg_light_green text_dark_green lg_shadow">
-        <div class="container mx-auto p-5">
+        <div class="container mx-auto p-md-5">
             <h2 class="text-center text-2 mb-5 pt-5">{{ title }}</h2>
             <div class="d-flex-justify-content-center">
                 <table class="table table-striped helpyou_table text_dark_green" >
@@ -11,7 +11,7 @@
                         </tr>
                         <tr>
                             <td class="col-6">E-mail:</td>
-                            <td class="col-6">ugyfelszolgalat@pizzeriatoscana.hu</td>
+                            <td class="col-6">ugyfsz@pizzeria.hu</td>
                         </tr>
                         <tr>
                             <td class="col-6">Rendelés:</td>

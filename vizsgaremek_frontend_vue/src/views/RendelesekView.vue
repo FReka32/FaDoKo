@@ -6,8 +6,8 @@
         <h1 class="fw-bold mb-4 fs-2 text-center" id="pageTop">Rendelések</h1>
       </div>
       <div class="row mx-0">
-        <div class="col-10 offset-1">
-          <div class="p-2 p-lg-5 pt-0 horizontal-scroll" >
+        <div class="col-12 offset-0 col-md-10 offset-md-1">
+          <div class="p-2 px-lg-5 pb-lg-5 pt-0 horizontal-scroll" >
             <table class="table table-striped helpyou_table text_dark_green ff_comfortaa ">
               <thead class="thead-dark">
                 <tr>
@@ -117,7 +117,6 @@
     </div>
   </div>
 </template>
-
   
 <script>
 import axios from "axios";
@@ -268,11 +267,3 @@ export default {
   },
 };
 </script>
-<style>
-@media(max-width: 1592px){
-  .horizontal-scroll{
-    overflow-x : scroll;
-  }
-}
-
-</style>

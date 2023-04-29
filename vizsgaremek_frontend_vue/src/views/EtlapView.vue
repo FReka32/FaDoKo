@@ -1,7 +1,7 @@
 <template>
-  <div class="etlap">
+  <div class="etlap mt-5 mt-lg-0">
     <div class="bg_light_green text_dark_green mt-5">
-      <div class="container-fluid p-5">
+      <div class="container-fluid p-0 p-md-5">
 
         <div class="container mx-auto p-xl-5">
           <h1 class="text-center text-1 ff_comfortaa ">Heti kedvencek</h1>
@@ -21,7 +21,7 @@
           <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
           <path
             d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
-        </svg> Új pizza hozzáadása</router-link>
+        </svg> Új pizza</router-link>
       <div class="container mx-auto p-xl-5">
         <h2 class="text-center text-2 mb-5 pt-5">Pizzáink</h2>
 
@@ -31,7 +31,7 @@
             <div class="row mx-0  row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3 equal-height">
 
 
-              <div v-for="product in products" v-bind:key="products.prId" class="col">
+              <div v-for="product in this.$store.state.products" v-bind:key="this.$store.state.products.prId" class="col">
                 <Pizza :pizza=product :jog=this.jog />
               </div>
 
@@ -60,27 +60,24 @@ export default {
       productId: "",
       logged: this.$store.state.logged,
       jog: this.$store.state.jogosultsag,
-      products: [],
+      //products: this.$store.state.products,
       favProducts: []
     };
   },
 
   methods: {
-    closeClick() {
-      this.$router.push("/");
-    },
     pizzakBeolvasasa() {
       let url = "https://localhost:5001/Product";
       axios
         .get(url)
         .then((response) => {
-          this.products = response.data;
-          //console.log(this.products);
+          this.$store.state.products = response.data;
+          //console.log(this.$store.state.products);
           for (let i = 0; i < 4; i++) {
-            this.favProducts.push(this.products[i+i*2]);
+            this.favProducts.push(this.$store.state.products[i+i*2]);
           }
-          for (let i = 0; i < this.products.length; i++) {
-            this.products[i].prSize = JSON.parse(this.products[i].prSize);
+          for (let i = 0; i < this.$store.state.products.length; i++) {
+            this.$store.state.products[i].prSize = JSON.parse(this.$store.state.products[i].prSize);
           }
 
 
@@ -97,6 +94,6 @@ export default {
 </script>
 <style>
 #pizzaAdminBtn {
-  right: 3rem;
+  right: 0.5rem;
 }
 </style>

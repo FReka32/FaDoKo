@@ -219,4 +219,10 @@
 #main_footer a.nav-link:hover {
 	color: #ffe59b;
 }
+@media(max-width: 1592px){
+  .horizontal-scroll{
+    overflow-x : scroll;
+  }
+}
+
 </style>

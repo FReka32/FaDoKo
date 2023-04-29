@@ -2,13 +2,13 @@
   <div class="login mt-5">
     <div class=" ff_comfortaa  bg_light_green text_dark_green lg_shadow py-5">
       <h1 v-if="!logged" class="fw-bold fs-2 text-center my-4">Bejelentkezés</h1>
-      <h1 v-else class="fw-bold fs-2 text-center my-4">Admin műveletek</h1>
+      <h1 v-else class="fw-bold fs-2 text-center my-5">Admin műveletek</h1>
       <div class="row mx-0">
 
-        <div class="col-8 offset-2">
+        <div class="col-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2">
           <div v-if="logged">
             <h2 class="fs-5">Regisztrált felhasználók:</h2>
-            <div class="py-5 my-3">
+            <div class="pb-lg-5 my-3 horizontal-scroll">
               <table class="table table-striped helpyou_table text_dark_green ff_comfortaa " id="regTable">
                 <thead class="thead-dark">
                   <tr>
@@ -85,13 +85,13 @@
                       <label for="floatingActive">Aktív</label>
                     </div>
                     <div class="form-floating">
-                      <input type="text" class="form-control rounded-3 mb-3" id="floatingPassword" placeholder="Password"
-                        v-model="Password" />
-                      <label for="floatingPassword">Jelszó</label>
+                      <input type="text" class="form-control rounded-3 mb-3" id="floatingPwd" placeholder="pwd"
+                        v-model="pwd" />
+                      <label for="floatingPwd">Jelszó</label>
                     </div>
                   </div>
                   <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="button"
-                    @click="felhasznaloMentes(adId, adName, adPermission, adEmail, adPhone, active, Password)">
+                    @click="felhasznaloMentes(adId, adName, adPermission, adEmail, adPhone, active, pwd)">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-save"
                       viewBox="0 0 16 16">
                       <path
@@ -109,7 +109,7 @@
           </div>
         </div>
 
-        <div class="col-12 col-md-6 offset-md-3 col-lg-4 offset-md-4">
+        <div class="col-12 col-md-6 offset-md-3 col-lg-4 offset-lg-4">
           <div class="p-5 pt-0">
             <form class="">
               <div v-if="!logged">
@@ -177,7 +177,7 @@ export default {
       adEmail: "",
       adPhone: "",
       active: 0,
-      password: "",
+      pwd: "",
       characters: 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
     };
   },
@@ -211,7 +211,7 @@ export default {
         .post("https://localhost:5001/Login/SaltRequest/" + FelhasznaloNeve)
         .then((response) => {
           let lekertSalt = response.data;
-          //console.log(lekertSalt);
+          console.log(lekertSalt);
           let tmpHash = sha256(Password + lekertSalt).toString();
           let url =
             "https://localhost:5001/Login?nev=" +
@@ -284,10 +284,10 @@ export default {
           //alert(error);
         });
     },
-    felhasznaloMentes(adId, adName, adPermission, adEmail, adPhone, active, password) {
+    felhasznaloMentes(adId, adName, adPermission, adEmail, adPhone, active, pwd) {
       if (adId === "") {
         //POST
-       let pwdData = this.generateHash(password);
+       let pwdData = this.generateHash(pwd);
         axios.post("https://localhost:5001/Admin", {
           "adName": adName,
           "adPermission": adPermission,
@@ -299,12 +299,12 @@ export default {
         })
           .then((response) => {
             if (response.status == 200) {
-              alert("Mentés sikeres");
+              alert("Fehasználó mentése sikeres");
               this.felhasznalokBeolvasasa();
               const element = document.getElementById("regTable");
               element.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
             } else {
-              alert("Mentés nem sikerült");
+              alert("Felhasználó mentése nem sikerült");
             }
           })
           .catch((error) => {
@@ -313,8 +313,8 @@ export default {
           });
       } else {
         //PUT
-        let pwdData = this.generateHash(password);
-        axios
+          let pwdData = this.generateHash(pwd);
+          axios
           .put("https://localhost:5001/Admin/" + adId, {
             "adName": adName,
             "adPermission": adPermission,
@@ -326,13 +326,13 @@ export default {
           })
           .then((response) => {
             if (response.status == 200) {
-              alert("Mentés sikeres");
+              alert("Módosítás mentése sikeres");
               this.felhasznalokBeolvasasa();
               const element = document.getElementById(adId);
               element.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
 
             } else {
-              alert("Mentés nem sikerült");
+              alert("Módosítás mentése nem sikerült");
             }
           })
           .catch((error) => {
@@ -370,9 +370,9 @@ export default {
         this.adEmail = "",
         this.adPhone = "",
         this.active = 0,
-        this.password = ""
+        this.pwd = ""
     },
-    generateHash(password) {
+    generateHash(uPassword) {
       let salt = '';
       const regex = /^[a-zA-Z0-9]+$/;
       for (let i = 0; i < 64; i++) {
@@ -381,7 +381,7 @@ export default {
       if (!regex.test(salt)) {
         alert('Érvénytelen karaktereket adott meg a jelszóban!');
       }
-      const hash = sha256(sha256(salt + password));
+      const hash = sha256(sha256(uPassword + salt)).toString();
       return { "salt": salt, "hash": hash };
     }
   },
