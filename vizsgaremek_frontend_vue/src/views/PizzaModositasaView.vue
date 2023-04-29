@@ -12,7 +12,7 @@
                         </div>
 
                         <div class="p-5 pt-0">
-                            <form class="">
+                            <form class="" @submit="checkForm">
                                 <div class="mb-5">
                                     <div class="form-floating">
                                         <input type="text" class="form-control rounded-3 mb-3" id="floatingName"
@@ -22,17 +22,21 @@
                                     <div class="form-floating">
                                         <input type="text" class="form-control rounded-3 mb-3" id="floatingOther"
                                             placeholder="Other" v-model="this.Other" />
-                                        <label for="floatingOther">Összetevők</label>
+                                        <label for="floatingOther">Feltétek</label>
                                     </div>
                                     <div class="form-floating">
                                         <input type="text" class="form-control rounded-3 mb-3" id="floatingUrl"
                                             placeholder="Url" v-model="this.Url" />
                                         <label for="floatingUrl">Kép</label>
                                     </div>
-                                    <div class="form-floating">
-                                        <input type="text" class="form-control rounded-3 mb-3" id="floatingActive"
-                                            placeholder="Active" v-model="this.Active" />
-                                        <label for="floatingActive">Aktív-e</label>
+                                   
+                                    <div class="">
+                                        <select class="form-select form-control rounded-3 py-3 ps-3 form-select-sm mb-3"
+                                            v-model="this.Active" id="floatingActive">
+                                            <option selected value="">Aktív</option>
+                                            <option value="1">1 - Aktív</option>
+                                            <option value="0">0 - Inaktív</option>
+                                        </select>
                                     </div>
                                     <div class="form-floating">
                                         <input type="text" class="form-control rounded-3 mb-3" id="floatingPrice"
@@ -42,8 +46,14 @@
                                     <hr class="my-4" />
                                 </div>
 
-                                <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="button"
-                                    @click="pizzaModositas(Name, Other, Url, Active, Price)">
+                                <p v-if="errors.length" class="border border-danger p-3">
+                                    <b>Kérem javítsa ki a következő hibá(ka)t:</b>
+                                <ul>
+                                    <li v-for="error in errors">{{ error }}</li>
+                                </ul>
+                                </p>
+
+                                <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                         class="bi bi-save" viewBox="0 0 16 16">
                                         <path
@@ -69,6 +79,7 @@ export default {
 
     data() {
         return {
+            errors: [],
             pizzaId: this.$store.state.productId,
             pizza: "",
             Name: "",
@@ -87,10 +98,10 @@ export default {
                 .then((response) => {
                     this.pizza = response.data;
                     this.Name = this.pizza.prName,
-                    this.Other = this.pizza.prOther,
-                    this.Url = this.pizza.prUrl,
-                    this.Active = this.pizza.prActive,
-                    this.Price = this.pizza.prPrice
+                        this.Other = this.pizza.prOther,
+                        this.Url = this.pizza.prUrl,
+                        this.Active = this.pizza.prActive,
+                        this.Price = this.pizza.prPrice
                 })
                 .catch((error) => {
                     //alert(error);
@@ -132,18 +143,63 @@ export default {
                         if (confirm("Mentés sikeres. Végzett a módosítással és visszatér az Étlap oldalra?")) {
                             this.pizzakBeolvasasa();
                             document.getElementById('etlapLink').click();
-                        } else{
+                        } else {
                             //stay on page
                         }
-                       
+
                     } else {
                         alert("Mentés nem sikerült");
                     }
                 })
                 .catch((error) => {
                     //console.log(error);
-                    alert("Hiba történt:\n" + error.message);
+                    alert("Hiba történt:\n" + error.message + "\nKérem ellenőrizze, egyedi nevet vett-e fel!");
                 });
+        },
+        checkForm: function (e) {
+            let isName = /^[a-zA-ZáéíóöőúüűÁÉÍÓÖŐÚÜŰ\s]*$/.test(this.Name);
+            let isOther = /^[a-zA-ZáéíóöőúüűÁÉÍÓÖŐÚÜŰ\s,]*$/.test(this.Other);
+            let isUrl = /^[a-zA-Z0-9+/]*={0,2}$/.test(this.Url);
+            let isDivFour = this.Url.length % 4 === 0;
+            let isNum = /^\d+$/.test(this.Price);
+            if (this.Name && isName && this.Other && isOther && this.Url && isUrl && isDivFour && this.Active !== "" && this.Price && isNum) {
+                this.pizzaModositas(this.Name, this.Other, this.Url, this.Active, this.Price);
+            }
+
+            this.errors = [];
+
+            if (!this.Name) {
+                this.errors.push('A név megadása kötelező.');
+            }
+            if (!isName) {
+                this.errors.push('A név csak a magyar ABC kis- és nagybetűit és szóközt tartalmazhat.');
+            }
+            if (!this.Other) {
+                this.errors.push('A feltétek megadása kötelező.');
+            }
+            if (!isOther) {
+                this.errors.push('A feltétek csak a magyar ABC kis- és nagybetűit, szóközt és veszzőt tartalmazhatnak.');
+            }
+            if (!this.Url) {
+                this.errors.push('A képhivatkozás megadása kötelező.');
+            }
+            if (!isUrl) {
+                this.errors.push('A képhivatkozás csak a base64-es kód lehet, annak is a "," utáni, új sorba tört részét:\n "data:image/jpeg;base64,\n/9j/4AAQSkZJRgA..."');
+            }
+            if (!isDivFour) {
+                this.errors.push('A képhivatkozás csak 4-el osztható karakterszámú kód lehet');
+            }
+            if (this.Active === "") {
+                this.errors.push('Az aktivitás megadása kötelező.');
+            }
+            if (!this.Price) {
+                this.errors.push('Az ár megadása kötelező.');
+            }
+            if (!isNum) {
+                this.errors.push('Az ár csak számokat tartalmazhat');
+            }
+
+            e.preventDefault();
         }
     },
     mounted: function () {

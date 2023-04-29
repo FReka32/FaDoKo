@@ -6,13 +6,31 @@
                 <div class="col-12 col-lg-6">
                     <div class="aboutus_img_container p-3 p-xl-5 h-100">
                         <div class="bg_img">
-                            
+                            <div class="map_container">
+                                <!--iframe width="100%" height="240" frameborder="0" scrolling="no" marginheight="0"
+                                    marginwidth="0"
+                                    src="https://www.openstreetmap.org/export/embed.html?bbox=20.79657%2C48.10252%2C20.79657%2C48.10252&layer=mapnik&marker=48.10252,%2020.79657"></iframe-->
+
+                                <iframe width="100%" height="240" frameborder="0" scrolling="no" marginheight="0"
+                                    marginwidth="0"
+                                    src="https://www.openstreetmap.org/export/embed.html?bbox=20.77833026647568%2C48.105002524855074%2C20.78084081411362%2C48.10624015465592&layer=mapnik&marker=48.10518765153231%2C20.779695510864258"></iframe><br /><small><a
+                                        href="https://www.openstreetmap.org/#map=19/48.10562/20.77959">Nagyobb
+                                        térkép</a></small>
+                            </div>
+
+
+
+
                         </div>
                     </div>
                 </div>
                 <div class="col-12 col-lg-6">
                     <div class="aboutus_txt_container p-3 p-xl-5 fw_500">
-                        <p>Pizzériánk könnyen elérhető helyen, mégis csendes, nyugodt zöldterület mellett helyezkedik el. Legkönnyebben úgy találhat meg minket, ha a fentebbi térképen megjelölt címre érkezik. Ha bármilyen kérdése lenne, kérjük keressen minket a fentebb megadott telefonszámok egyikén nyitvatartási időben, vagy írjon ügyfélszolgálatunknak, kollégáink örömmel rendelkezésére állnak.</p>
+                        <p>Pizzériánk könnyen elérhető helyen, mégis csendes, nyugodt zöldterület mellett helyezkedik el.
+                            Legkönnyebben úgy találhat meg minket, ha a fentebbi térképen megjelölt címre érkezik. Ha
+                            bármilyen kérdése lenne, kérjük keressen minket a fentebb megadott telefonszámok egyikén
+                            nyitvatartási időben, vagy írjon ügyfélszolgálatunknak, kollégáink örömmel rendelkezésére
+                            állnak.</p>
                         <p><strong>Cím: 3525 Miskolc, Palóczy László utca 3.</strong></p>
                         <p>Szeretettel várjuk kedves vendégeinket!</p>
                     </div>
@@ -35,15 +53,7 @@ export default {
 
 <style scoped>
 .bg_img {
-    background-size: cover;
     height: inherit;
     width: 100%;
-    min-height: 250px;
-    background-image: url(../assets/kando_terkep.png);
-    background-position-x: center;
-    background-position-y: center;
-    background-repeat-x: no-repeat;
-    background-repeat-y: no-repeat;
 }
-
 </style>

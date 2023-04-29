@@ -52,7 +52,9 @@ html, body, #app{
     --bs-btn-active-border-color: #ffe59b;
     --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
 }
-.text_dark_green{
+.text_dark_green,
+.form-select,
+.form-control{
     color:rgb(39 100 2);
 }
 .fw_500{

@@ -5,7 +5,7 @@
             <div class="card-text d-flex flex-column h-100 justify-content-between">
                 <div>
                     <p class="mb-3 h5">{{ pizza.prName }}</p>
-                    <p class="mb-1">Összetevők:</p>
+                    <p class="mb-1">Feltétek:</p>
                     <p class="mb-3">{{ pizza.prOther }}</p>
                 </div>
 
@@ -72,7 +72,7 @@ export default {
                     .delete(url)
                     .then((response) => {
                         if (response.status == 200) {
-                            alert(response.data);
+                            //alert(response.data);
                             this.pizzakBeolvasasa();
                         } else {
                             //alert(response.data);

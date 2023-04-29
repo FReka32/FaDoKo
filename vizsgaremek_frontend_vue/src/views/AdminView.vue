@@ -52,7 +52,7 @@
             <div class=" mt-5 col-12 col-md-6 offset-md-3">
               <h2 class="fw-bold mb-4 fs-4 text-center">Módosítás</h2>
               <div class="pb-5">
-                <form class="" id="modositasForm">
+                <form class="" id="modositasForm" @submit="checkModositasForm">
                   <div class="mb-5">
                     <div class="form-floating">
                       <input type="text" class="form-control rounded-3 mb-3" id="floatingAdId" placeholder="AdId"
@@ -64,11 +64,17 @@
                         v-model="this.adName" />
                       <label for="floatingAdName">Név</label>
                     </div>
-                    <div class="form-floating">
-                      <input type="text" class="form-control rounded-3 mb-3" id="floatingAdPermission"
-                        placeholder="AdPermission" v-model="this.adPermission" />
-                      <label for="floatingAdPermission">Jogosultság</label>
+
+                    <div class="">
+                      <select class="form-select form-control rounded-3 py-3 ps-3 form-select-sm mb-3" v-model="this.adPermission"
+                        id="floatingAdPermission">
+                        <option selected value="">Jogosultság</option>
+                        <option value="7">7 - Dolgozó</option>
+                        <option value="8">8 - Manager</option>
+                        <option value="9">9 - Adminisztrátor</option>
+                      </select>
                     </div>
+
                     <div class="form-floating">
                       <input type="text" class="form-control rounded-3 mb-3" id="floatingAdEmail" placeholder="AdEmail"
                         v-model="this.adEmail" />
@@ -79,19 +85,27 @@
                         v-model="this.adPhone" />
                       <label for="floatingAdPhone">Telefon</label>
                     </div>
-                    <div class="form-floating">
-                      <input type="text" class="form-control rounded-3 mb-3" id="floatingActive" placeholder="active"
-                        v-model="this.active" />
-                      <label for="floatingActive">Aktív</label>
+                    <div class="">
+                      <select class="form-select form-control rounded-3 py-3 ps-3 form-select-sm mb-3" v-model="this.active"
+                        id="floatingActive">
+                        <option selected value="">Aktív</option>
+                        <option value="1">1 - Aktív</option>
+                        <option value="0">0 - Inaktív</option>
+                      </select>
                     </div>
                     <div class="form-floating">
-                      <input type="text" class="form-control rounded-3 mb-3" id="floatingPwd" placeholder="pwd"
-                        v-model="pwd" />
+                      <input type="password" class="form-control rounded-3 mb-3" id="floatingPwd" placeholder="pwd"
+                        v-model="this.pwd" autocomplete="off" />
                       <label for="floatingPwd">Jelszó</label>
                     </div>
                   </div>
-                  <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="button"
-                    @click="felhasznaloMentes(adId, adName, adPermission, adEmail, adPhone, active, pwd)">
+                  <p v-if="errorsModositas.length" class="border border-danger p-3">
+                    <b>Kérem javítsa ki a következő adminisztrációs hibá(ka)t:</b>
+                  <ul>
+                    <li v-for="error in errorsModositas">{{ error }}</li>
+                  </ul>
+                  </p>
+                  <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-save"
                       viewBox="0 0 16 16">
                       <path
@@ -105,13 +119,14 @@
                   </button>
                 </form>
               </div>
+              <hr class="my-4" />
             </div>
           </div>
         </div>
 
         <div class="col-12 col-md-6 offset-md-3 col-lg-4 offset-lg-4">
           <div class="p-5 pt-0">
-            <form class="">
+            <form class="" @submit="checkLoginForm">
               <div v-if="!logged">
                 <div class="form-floating mb-3">
                   <input type="text" class="form-control rounded-3" id="floatingInput" placeholder="UserName"
@@ -120,13 +135,18 @@
                 </div>
                 <div class="form-floating mb-3">
                   <input type="password" class="form-control rounded-3" id="floatingPassword" placeholder="Password"
-                    v-model="Password" />
+                    v-model="Password" autocomplete="off" />
                   <label for="floatingPassword">Jelszó</label>
                 </div>
               </div>
+              <p v-if="errorsLogin.length" class="border border-danger p-3">
+                <b>Kérem javítsa ki a következő bejelentkezési hibá(ka)t:</b>
+              <ul>
+                <li v-for="error in errorsLogin">{{ error }}</li>
+              </ul>
+              </p>
               <div class="d-flex justify-content-center">
-                <button v-if="!logged" class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="button"
-                  @click="loginClick(FelhasznaloNeve, Password)">
+                <button v-if="!logged" class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                     class="bi bi-box-arrow-in-right" viewBox="0 0 16 16">
                     <path fill-rule="evenodd"
@@ -165,6 +185,8 @@ export default {
 
   data() {
     return {
+      errorsLogin: [],
+      errorsModositas: [],
       FelhasznaloNeve: "",
       Password: "",
       logged: this.$store.state.logged,
@@ -176,7 +198,7 @@ export default {
       adPermission: "",
       adEmail: "",
       adPhone: "",
-      active: 0,
+      active: "",
       pwd: "",
       characters: 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
     };
@@ -287,7 +309,7 @@ export default {
     felhasznaloMentes(adId, adName, adPermission, adEmail, adPhone, active, pwd) {
       if (adId === "") {
         //POST
-       let pwdData = this.generateHash(pwd);
+        let pwdData = this.generateHash(pwd);
         axios.post("https://localhost:5001/Admin", {
           "adName": adName,
           "adPermission": adPermission,
@@ -303,6 +325,7 @@ export default {
               this.felhasznalokBeolvasasa();
               const element = document.getElementById("regTable");
               element.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
+              this.felhasznaloMegse();
             } else {
               alert("Felhasználó mentése nem sikerült");
             }
@@ -313,8 +336,8 @@ export default {
           });
       } else {
         //PUT
-          let pwdData = this.generateHash(pwd);
-          axios
+        let pwdData = this.generateHash(pwd);
+        axios
           .put("https://localhost:5001/Admin/" + adId, {
             "adName": adName,
             "adPermission": adPermission,
@@ -330,7 +353,7 @@ export default {
               this.felhasznalokBeolvasasa();
               const element = document.getElementById(adId);
               element.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
-
+              this.felhasznaloMegse();
             } else {
               alert("Módosítás mentése nem sikerült");
             }
@@ -365,12 +388,12 @@ export default {
 
     },
     felhasznaloMegse() {
-      this.adName = "",
-        this.adPermission = "",
-        this.adEmail = "",
-        this.adPhone = "",
-        this.active = 0,
-        this.pwd = ""
+      this.adName = "";
+      this.adPermission = "";
+      this.adEmail = "";
+      this.adPhone = "";
+      this.active = "";
+      this.pwd = ""
     },
     generateHash(uPassword) {
       let salt = '';
@@ -383,6 +406,67 @@ export default {
       }
       const hash = sha256(sha256(uPassword + salt)).toString();
       return { "salt": salt, "hash": hash };
+    },
+    checkLoginForm: function (e) {
+      if (this.FelhasznaloNeve && this.Password) {
+        this.loginClick(this.FelhasznaloNeve, this.Password);
+      }
+
+      this.errorsLogin = [];
+
+      if (!this.FelhasznaloNeve) {
+        this.errorsLogin.push('A név megadása kötelező.');
+      }
+      if (!this.age) {
+        this.errorsLogin.push('A jelszó megadása kötelező.');
+      }
+
+      e.preventDefault();
+    },
+    checkModositasForm: function (e) {
+      let isUname = /^[a-zA-ZáéíóöőúüűÁÉÍÓÖŐÚÜŰ0-9\s]*$/.test(this.adName);
+      let isPwd = /^[a-zA-Z0-9]+$/.test(this.pwd);
+      let isPhone = /^(?:(?:\+|00)[01]|(?:\+|00)36|0[06])(?:1|20|30|31|40|50|70|71|72|73|75|76|[2-9]\d{1})[0-9]{6,7}$/.test(this.adPhone);
+      let isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.adEmail);
+
+      if (this.adName && isUname && this.adPermission !== "" && this.adEmail && isEmail && this.adPhone && isPhone && this.active !== "" && this.pwd && isPwd) {
+        this.felhasznaloMentes(this.adId, this.adName, this.adPermission, this.adEmail, this.adPhone, this.active, this.pwd);
+      }
+
+      this.errorsModositas = [];
+
+      if (!this.adName) {
+        this.errorsModositas.push('A név megadása kötelező.');
+      }
+      if (!isUname) {
+        this.errorsModositas.push('A név csak a magyar ABC kis- és nagybetűit, valamint számokat és szóközt tartalmazhat.');
+      }
+      if (this.adPermission === "") {
+        this.errorsModositas.push('A jogosultság megadása kötelező.');
+      }
+      if (!this.adEmail) {
+        this.errorsModositas.push('Az email megadása kötelező.');
+      }
+      if (!isEmail) {
+        this.errors.push('Érvényes formátumú email-t kell megadni!');
+      }
+      if (!this.adPhone) {
+        this.errorsModositas.push('A telefonszám megadása kötelező.');
+      }
+      if (!isPhone) {
+        this.errorsModositas.push('Érvényes formátumú telefonszámot kell megadni!');
+      }
+      if (this.active === "") {
+        this.errorsModositas.push('Az aktivitás megadása kötelező.');
+      }
+      if (!this.pwd) {
+        this.errorsModositas.push('A jelszó megadása kötelező.');
+      }
+      if (!isPwd) {
+        this.errorsModositas.push('A jelszó csak az angol ABC kis- és nagybetűit és számokat tartalmazhat.');
+      }
+
+      e.preventDefault();
     }
   },
   mounted: function () {
