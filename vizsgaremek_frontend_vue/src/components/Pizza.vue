@@ -1,5 +1,5 @@
 <template>
-    <div class="card shadow-sm h-100">
+    <div class="card shadow-sm h-100" v-bind:style="[pizza.prActive ? { opacity: 1 } : { opacity: 0.7 }]">
         <img class="img-fluid" :src="'data:image/jpeg;base64,' + pizza.prUrl" width="500" height="225">
         <div class="card-body">
             <div class="card-text d-flex flex-column h-100 justify-content-between">
@@ -10,8 +10,9 @@
                 </div>
 
                 <div>
-                    <p class="mb-1">Ár: {{ pizza.prPrice }}</p>
-                    <div v-if="jog == 9" class="btn-group">
+                    <p v-if="pizza.prActive" class="mb-1">Ár: {{ pizza.prPrice }}</p>
+                    <p v-else class="mb-1">Jelenleg nem elérhető</p>
+                    <div v-if="jog >= 8" class="btn-group">
                         <router-link class="btn btn-sm btn-outline-primary" to="/pizza-modositasa"
                             @click="modifyClick(pizza.prId)"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                 fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
@@ -66,23 +67,27 @@ export default {
                 });
         },
         deleteClick(product) {
-            if (confirm('Biztosan törölni akarja ezt a pizzát?\nID: ' + product.prId + '\nNév: ' + product.prName)) {
-                let url = "https://localhost:5001/Product/" + product.prId;
-                axios
-                    .delete(url)
-                    .then((response) => {
-                        if (response.status == 200) {
-                            //alert(response.data);
-                            this.pizzakBeolvasasa();
-                        } else {
-                            //alert(response.data);
-                        }
-                    })
-                    .catch((error) => {
-                        //console.log(error);
-                    });
+            if (this.jog >= 8) {
+                if (confirm('Biztosan törölni akarja ezt a pizzát?\nID: ' + product.prId + '\nNév: ' + product.prName)) {
+                    let url = "https://localhost:5001/Product/" + product.prId;
+                    axios
+                        .delete(url)
+                        .then((response) => {
+                            if (response.status == 200) {
+                                //alert(response.data);
+                                this.pizzakBeolvasasa();
+                            } else {
+                                //alert(response.data);
+                            }
+                        })
+                        .catch((error) => {
+                            //console.log(error);
+                        });
+                } else {
+                    // Do nothing!
+                }
             } else {
-                // Do nothing!
+                alert("A pizzák törléséhez nincs jogosultsága!");
             }
 
         },

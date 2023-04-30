@@ -11,7 +11,7 @@
                             <h1 class="fw-bold mb-4 fs-2 text-center">Pizza módosítása</h1>
                         </div>
 
-                        <div class="p-5 pt-0">
+                        <div v-if="logged" class="p-5 pt-0">
                             <form class="" @submit="checkForm">
                                 <div class="mb-5">
                                     <div class="form-floating">
@@ -29,11 +29,11 @@
                                             placeholder="Url" v-model="this.Url" />
                                         <label for="floatingUrl">Kép</label>
                                     </div>
-                                   
+
                                     <div class="">
                                         <select class="form-select form-control rounded-3 py-3 ps-3 form-select-sm mb-3"
                                             v-model="this.Active" id="floatingActive">
-                                            <option selected value="">Aktív</option>
+                                            <option selected value="">Elérhetőség</option>
                                             <option value="1">1 - Aktív</option>
                                             <option value="0">0 - Inaktív</option>
                                         </select>
@@ -64,6 +64,9 @@
 
                             </form>
                         </div>
+                        <div v-else>
+                            <p class="text-center h5">Kérjük, jelentkezzen be!</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -79,6 +82,8 @@ export default {
 
     data() {
         return {
+            logged: this.$store.state.logged,
+            jog: this.$store.state.jogosultsag,
             errors: [],
             pizzaId: this.$store.state.productId,
             pizza: "",
@@ -128,37 +133,41 @@ export default {
                 });
         },
         pizzaModositas(Name, Other, Url, Active, Price) {
-            axios
-                .put("https://localhost:5001/Product/" + this.pizzaId, {
-                    "prName": Name,
-                    "prSize": JSON.stringify({ "0": "25", "1": "35", "2": "45" }),
-                    "prOther": Other,
-                    "coIds": "{}",
-                    "prUrl": Url,
-                    "prActive": Active,
-                    "prPrice": Price
-                })
-                .then((response) => {
-                    if (response.status == 200) {
-                        if (confirm("Mentés sikeres. Végzett a módosítással és visszatér az Étlap oldalra?")) {
-                            this.pizzakBeolvasasa();
-                            document.getElementById('etlapLink').click();
-                        } else {
-                            //stay on page
-                        }
+            if (this.jog >= 8) {
+                axios
+                    .put("https://localhost:5001/Product/" + this.pizzaId, {
+                        "prName": Name,
+                        "prSize": JSON.stringify({ "0": "25", "1": "35", "2": "45" }),
+                        "prOther": Other,
+                        "coIds": "{}",
+                        "prUrl": Url,
+                        "prActive": Active,
+                        "prPrice": Price
+                    })
+                    .then((response) => {
+                        if (response.status == 200) {
+                            if (confirm("Mentés sikeres. Végzett a módosítással és visszatér az Étlap oldalra?")) {
+                                this.pizzakBeolvasasa();
+                                document.getElementById('etlapLink').click();
+                            } else {
+                                //stay on page
+                            }
 
-                    } else {
-                        alert("Mentés nem sikerült");
-                    }
-                })
-                .catch((error) => {
-                    //console.log(error);
-                    alert("Hiba történt:\n" + error.message + "\nKérem ellenőrizze, egyedi nevet vett-e fel!");
-                });
+                        } else {
+                            alert("Mentés nem sikerült");
+                        }
+                    })
+                    .catch((error) => {
+                        //console.log(error);
+                        alert("Hiba történt:\n" + error.message + "\nKérem ellenőrizze, egyedi nevet vett-e fel!");
+                    });
+            } else {
+                alert("A pizzák módosításához nincs jogosultsága!");
+            }
         },
         checkForm: function (e) {
-            let isName = /^[a-zA-ZáéíóöőúüűÁÉÍÓÖŐÚÜŰ\s]*$/.test(this.Name);
-            let isOther = /^[a-zA-ZáéíóöőúüűÁÉÍÓÖŐÚÜŰ\s,]*$/.test(this.Other);
+            let isName = /^[a-zA-ZáéíóöőúüűÁÉÍÓÖŐÚÜŰ\s-]*$/.test(this.Name);
+            let isOther = /^[a-zA-ZáéíóöőúüűÁÉÍÓÖŐÚÜŰ\s,-]*$/.test(this.Other);
             let isUrl = /^[a-zA-Z0-9+/]*={0,2}$/.test(this.Url);
             let isDivFour = this.Url.length % 4 === 0;
             let isNum = /^\d+$/.test(this.Price);
@@ -172,13 +181,13 @@ export default {
                 this.errors.push('A név megadása kötelező.');
             }
             if (!isName) {
-                this.errors.push('A név csak a magyar ABC kis- és nagybetűit és szóközt tartalmazhat.');
+                this.errors.push('A név csak a magyar ABC kis- és nagybetűit, kötőjelet és szóközt tartalmazhat.');
             }
             if (!this.Other) {
                 this.errors.push('A feltétek megadása kötelező.');
             }
             if (!isOther) {
-                this.errors.push('A feltétek csak a magyar ABC kis- és nagybetűit, szóközt és veszzőt tartalmazhatnak.');
+                this.errors.push('A feltétek csak a magyar ABC kis- és nagybetűit, szóközt, kötőjelet és vesszőt tartalmazhatnak.');
             }
             if (!this.Url) {
                 this.errors.push('A képhivatkozás megadása kötelező.');

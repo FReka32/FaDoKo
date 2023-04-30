@@ -5,20 +5,20 @@
         <!-- <h1 class="modal-title fs-5" >Modal title</h1> -->
         <h1 class="fw-bold mb-4 fs-2 text-center" id="pageTop">Rendelések</h1>
       </div>
-      <div class="row mx-0">
+      <div v-if="logged" class="row mx-0">
         <div class="col-12 offset-0 col-md-10 offset-md-1">
           <div class="p-2 px-lg-5 pb-lg-5 pt-0 horizontal-scroll">
             <table class="table table-striped helpyou_table text_dark_green ff_comfortaa ">
               <thead class="thead-dark">
                 <tr>
                   <th>Rendelés azonosító</th>
+                  <th>Állapot</th>
+                  <th>Dolgozó azonosító</th>
                   <th>Rendelés tartalma</th>
-                  <th>Felhasználó azonosító</th>
                   <th>Név</th>
                   <th>Cím</th>
                   <th>Telefon</th>
                   <th>Email</th>
-                  <th>Állapot</th>
                   <th>Rendelési idő</th>
                   <th>Műveletek</th>
                 </tr>
@@ -26,13 +26,13 @@
               <tbody>
                 <tr v-for="rendeles in rendelesek.slice().reverse()" v-bind:key="rendeles.orId" :id="rendeles.orId">
                   <td>{{ rendeles.orId }}</td>
-                  <td>{{ rendeles.orData }}</td>
+                  <td class="text-center">{{ rendeles.status }}</td>
                   <td class="text-center">{{ rendeles.adId }}</td>
+                  <td>{{ rendeles.orData }}</td>
                   <td>{{ rendeles.name }}</td>
                   <td>{{ rendeles.address }}</td>
                   <td>{{ rendeles.phone }}</td>
                   <td>{{ rendeles.email }}</td>
-                  <td class="text-center">{{ rendeles.status }}</td>
                   <td>{{ rendeles.logDate }}</td>
                   <td class="text-center">
                     <button class="btn btn-sm btn-outline-primary me-1" @click="rendelesBeolvasasa(rendeles.orId)"><svg
@@ -65,6 +65,36 @@
                     v-model="this.orId" disabled />
                   <label for="floatingOrId">Rendelés azonosítója</label>
                 </div>
+                <div class="">
+                  <select class="form-select form-control rounded-3 py-3 ps-3 form-select-sm mb-3" v-model="this.status"
+                    id="floatingStatus">
+                    <option selected value="">Kérem válasszon státuszt!</option>
+                    <option value="0">0 - Rendelés felvéve</option>
+                    <option value="1">1 - Elkészítés alatt</option>
+                    <option value="2">2 - Elkészítve</option>
+                    <option value="3">3 - Szállítás alatt</option>
+                    <option value="4">4 - Kiszállítva</option>
+                  </select>
+                </div>
+
+                <div class="">
+                  <select class="form-select form-control rounded-3 py-3 ps-3 form-select-sm mb-3">
+                    id="floatingAdId">
+                    <option selected value="" id="defaultMeretOption">Kérem válasszon dolgozót!</option>
+                    <template v-for="dolgozo in dolgozok" :key="dolgozok.adId" v-model="this.adId">
+                      <option v-if="this.status == '0' && dolgozo.adPermission == '7'">
+                        {{ dolgozo.adId }} - {{ dolgozo.adPermission }} - {{ dolgozo.adName }}</option>
+                      <option v-if="this.status == '1' && dolgozo.adPermission == '6'">
+                        {{ dolgozo.adId }} - {{ dolgozo.adPermission }} - {{ dolgozo.adName }}</option>
+                      <option v-if="this.status == '2' && dolgozo.adPermission == '5'">
+                        {{ dolgozo.adId }} - {{ dolgozo.adPermission }} - {{ dolgozo.adName }}</option>
+                      <option v-if="(this.status == '3' || this.status == '4') && dolgozo.adPermission == '4'">
+                        {{ dolgozo.adId }} - {{ dolgozo.adPermission }} - {{ dolgozo.adName }}</option>
+                    </template>
+
+                  </select>
+                </div>
+
                 <div class="form-floating">
                   <input type="text" class="form-control rounded-3 mb-3" id="floatingOrData" placeholder="OrData"
                     v-model="this.orData" />
@@ -133,16 +163,6 @@
                     v-model="this.email" />
                   <label for="floatingEmail">Email</label>
                 </div>
-                <div class="">
-                  <select class="form-select form-control rounded-3 py-3 ps-3 form-select-sm mb-3" v-model="this.status"
-                    id="floatingStatus">
-                    <option selected value="">Státusz</option>
-                    <option value="0">0 - Rendelés felvéve</option>
-                    <option value="1">1 - Elkészítés alatt</option>
-                    <option value="2">2 - Szállítás alatt</option>
-                    <option value="3">3 - Kiszállítva</option>
-                  </select>
-                </div>
               </div>
               <p v-if="errors.length" class="border border-danger p-3">
                 <b>Kérem javítsa ki a következő hibá(ka)t:</b>
@@ -166,6 +186,9 @@
         </div>
 
       </div>
+      <div v-else>
+        <p class="text-center h5">Kérjük, jelentkezzen be!</p>
+      </div>
     </div>
   </div>
 </template>
@@ -181,11 +204,14 @@ export default {
     return {
       errors: [],
       logged: this.$store.state.logged,
+      jog : this.$store.state.jogosultsag,
       rendelesek: [],
       pizzak: [],
+      dolgozok: [],
       meretek: { 0: "25", 1: "35", 2: "45" },
       rendeles: "",
       orId: "",
+      adId: "",
       orData: "[]",
       pizzaValasztas: "",
       meretValasztas: "",
@@ -198,6 +224,19 @@ export default {
   },
 
   methods: {
+    dolgozokBeolvasasa() {
+      let url = "https://localhost:5001/Admin";
+      axios
+        .get(url)
+        .then((response) => {
+          console.log(this.status);
+          this.dolgozok = response.data;
+          console.log(this.dolgozok);
+        })
+        .catch((error) => {
+          //alert(error);
+        });
+    },
     pizzakBeolvasasa() {
       let url = "https://localhost:5001/Product";
       axios
@@ -235,6 +274,7 @@ export default {
         .then((response) => {
           this.rendeles = response.data;
           this.orId = this.rendeles.orId;
+          this.adId = this.rendeles.adId;
           this.orData = this.rendeles.orData;
           this.name = this.rendeles.name;
           this.address = this.rendeles.address;
@@ -248,12 +288,14 @@ export default {
           //alert(error);
         });
     },
-    rendelesMentes(orId, orData, name, address, phone, email, status) {
-      console.log("rendelésmentés betöltött");
+    rendelesMentes(orId, adId, orData, name, address, phone, email, status) {
+      console.log(this.jog);
+      if (this.jog >= 7) {
       if (orId === "") {
         //POST
         console.log("rendelésmentés post");
         axios.post("https://localhost:5001/Order", {
+          "adId": adId,
           "orData": orData,
           "name": name,
           "address": address,
@@ -281,6 +323,7 @@ export default {
         console.log("rendelésmentés put");
         axios
           .put("https://localhost:5001/Order/" + orId, {
+            "adId": adId,
             "orData": orData,
             "name": name,
             "address": address,
@@ -305,10 +348,13 @@ export default {
             alert("Hiba történt:\n" + error.message);
           });
       }
-
+    }else{
+      alert("A rendelések hozzáadásához és módosításához nincs jogosultsága!")
+    }
 
     },
     rendelesTorlese(rendeles) {
+      if (this.jog >=7 ) {
       if (confirm('Biztosan törölni akarja ezt a rendelést?\nID: ' + rendeles.orId + '\nNév: ' + rendeles.name + '\nDátum: ' + rendeles.logDate)) {
         let url = "https://localhost:5001/Order/" + rendeles.orId;
         axios
@@ -327,11 +373,15 @@ export default {
       } else {
         // Do nothing!
       }
+    } else {
+      alert("A rendelések törléséhez nincs jogosultsága!");
+    }
 
     },
     rendelesMegse() {
       this.rendeles = "";
       this.orId = "";
+      this.adId = "";
       this.orData = "";
       this.name = "";
       this.address = "";
@@ -348,13 +398,16 @@ export default {
       let isPhone = /^(?:(?:\+|00)[01]|(?:\+|00)36|0[06])(?:1|20|30|31|40|50|70|71|72|73|75|76|[2-9]\d{1})[0-9]{6,7}$/.test(this.phone);
       let isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.email);
       console.log("ellenőrzés");
-      if (this.orData && this.name && isName && this.address && this.phone && isPhone && this.email && isEmail && this.status !== "") {
+      if (this.adId !== "" && this.orData && this.name && isName && this.address && this.phone && isPhone && this.email && isEmail && this.status !== "") {
         console.log("mentés functionig eljött");
-        this.rendelesMentes(this.orId, this.orData, this.name, this.address, this.phone, this.email, this.status)
+        this.rendelesMentes(this.orId, this.adId, this.orData, this.name, this.address, this.phone, this.email, this.status)
       }
 
       this.errors = [];
 
+      if (this.adId === "") {
+        this.errors.push('A dolgozói azonosító megadása kötelező.');
+      }
       if (!this.orData) {
         this.errors.push('A rendelés tartalmának megadása kötelező.');
       }
@@ -389,6 +442,7 @@ export default {
   mounted: function () {
     this.rendelesekBeolvasasa();
     this.pizzakBeolvasasa();
+    this.dolgozokBeolvasasa();
   },
 };
 </script>
