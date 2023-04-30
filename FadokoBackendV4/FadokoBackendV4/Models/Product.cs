@@ -9,7 +9,6 @@ namespace FadokoBackendV4.Models
     {
         public int PrId { get; set; }
         public string PrName { get; set; }
-        public string PrSize { get; set; }
         public string PrOther { get; set; }
         public string PrUrl { get; set; }
         public int PrActive { get; set; }

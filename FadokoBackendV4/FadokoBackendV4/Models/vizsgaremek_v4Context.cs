@@ -142,9 +142,6 @@ namespace FadokoBackendV4.Models
 
                 entity.Property(e => e.PrPrice).HasColumnType("int(6)");
 
-                entity.Property(e => e.PrSize)
-                    .IsRequired()
-                    .HasMaxLength(500);
 
                 entity.Property(e => e.PrUrl)
                     .IsRequired()

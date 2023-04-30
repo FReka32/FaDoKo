@@ -75,7 +75,6 @@ namespace FadokoBackendV4.Controllers
                     {
                         Product product = new Product();
                         product.PrName = productrequest.PrName;
-                        product.PrSize = productrequest.PrSize;
                         product.PrOther = productrequest.PrOther;
                         product.PrUrl = productrequest.PrUrl;
                         product.PrActive = productrequest.PrActive;
@@ -108,7 +107,6 @@ namespace FadokoBackendV4.Controllers
                     {
                         Product product = context.Products.First(a => a.PrId == PrId);
                         product.PrName = productupdate.PrName;
-                        product.PrSize = productupdate.PrSize;
                         product.PrOther = productupdate.PrOther;
                         product.PrUrl = productupdate.PrUrl;
                         product.PrActive = productupdate.PrActive;

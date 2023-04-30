@@ -76,9 +76,6 @@ export default {
           for (let i = 0; i < 4; i++) {
             this.favProducts.push(this.$store.state.products[i+i*2]);
           }
-          for (let i = 0; i < this.$store.state.products.length; i++) {
-            this.$store.state.products[i].prSize = JSON.parse(this.$store.state.products[i].prSize);
-          }
 
 
         })
