@@ -24,7 +24,7 @@
                       <th class="text-center">Jogosultság</th>
                       <th>E-mail</th>
                       <th>Telefon</th>
-                      <th class="text-center">Aktív</th>
+                      <th class="text-center">Aktivitás</th>
                       <th>Műveletek</th>
                     </tr>
                   </thead>

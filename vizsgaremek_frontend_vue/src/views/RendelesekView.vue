@@ -78,17 +78,16 @@
                 </div>
 
                 <div class="">
-                  <select class="form-select form-control rounded-3 py-3 ps-3 form-select-sm mb-3">
-                    id="floatingAdId">
+                  <select class="form-select form-control rounded-3 py-3 ps-3 form-select-sm mb-3" id="floatingAdId" v-model="this.adId">
                     <option selected value="" id="defaultMeretOption">Kérem válasszon dolgozót!</option>
-                    <template v-for="dolgozo in dolgozok" :key="dolgozok.adId" v-model="this.adId">
-                      <option v-if="this.status == '0' && dolgozo.adPermission == '7'">
+                    <template v-for="dolgozo in dolgozok" :key="dolgozok.adId">
+                      <option v-if="this.status == '0' && dolgozo.adPermission == '7'" :value="dolgozo.adId">
                         {{ dolgozo.adId }} - {{ dolgozo.adPermission }} - {{ dolgozo.adName }}</option>
-                      <option v-if="this.status == '1' && dolgozo.adPermission == '6'">
+                      <option v-if="this.status == '1' && dolgozo.adPermission == '6'" :value="dolgozo.adId">
                         {{ dolgozo.adId }} - {{ dolgozo.adPermission }} - {{ dolgozo.adName }}</option>
-                      <option v-if="this.status == '2' && dolgozo.adPermission == '5'">
+                      <option v-if="this.status == '2' && dolgozo.adPermission == '5'" :value="dolgozo.adId">
                         {{ dolgozo.adId }} - {{ dolgozo.adPermission }} - {{ dolgozo.adName }}</option>
-                      <option v-if="(this.status == '3' || this.status == '4') && dolgozo.adPermission == '4'">
+                      <option v-if="(this.status == '3' || this.status == '4') && dolgozo.adPermission == '4'" :value="dolgozo.adId">
                         {{ dolgozo.adId }} - {{ dolgozo.adPermission }} - {{ dolgozo.adName }}</option>
                     </template>
 
@@ -402,6 +401,8 @@ export default {
         console.log("mentés functionig eljött");
         this.rendelesMentes(this.orId, this.adId, this.orData, this.name, this.address, this.phone, this.email, this.status)
       }
+
+      console.log(this.adId);
 
       this.errors = [];
 
