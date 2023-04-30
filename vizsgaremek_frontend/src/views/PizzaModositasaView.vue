@@ -118,7 +118,6 @@ export default {
                 .get(url)
                 .then((response) => {
                     this.$store.state.products = response.data;
-                    //console.log(this.products);
                     for (let i = 0; i < 4; i++) {
                         this.favProducts.push(this.$store.state.products[i + i * 2]);
                     }
@@ -154,7 +153,7 @@ export default {
                     })
                     .catch((error) => {
                         //console.log(error);
-                        alert("Hiba történt:\n" + error.message + "\nKérem ellenőrizze, egyedi nevet vett-e fel!");
+                        alert("Kérem ellenőrizze, egyedi nevet vett-e fel!");
                     });
             } else {
                 alert("A pizzák módosításához nincs jogosultsága!");

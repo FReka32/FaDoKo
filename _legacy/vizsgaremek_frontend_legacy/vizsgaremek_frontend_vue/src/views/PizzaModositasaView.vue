@@ -109,7 +109,7 @@ export default {
                         this.Price = this.pizza.prPrice
                 })
                 .catch((error) => {
-                    //alert(error);
+                    //console.log(error);
                 });
         },
         pizzakBeolvasasa() {
@@ -118,14 +118,13 @@ export default {
                 .get(url)
                 .then((response) => {
                     this.$store.state.products = response.data;
-                    //console.log(this.products);
                     for (let i = 0; i < 4; i++) {
                         this.favProducts.push(this.$store.state.products[i + i * 2]);
                     }
 
                 })
                 .catch((error) => {
-                    //alert(error);
+                    //console.log(error);
                 });
         },
         pizzaModositas(Name, Other, Url, Active, Price) {
@@ -154,7 +153,7 @@ export default {
                     })
                     .catch((error) => {
                         //console.log(error);
-                        alert("Hiba történt:\n" + error.message + "\nKérem ellenőrizze, egyedi nevet vett-e fel!");
+                        alert("Kérem ellenőrizze, egyedi nevet vett-e fel!");
                     });
             } else {
                 alert("A pizzák módosításához nincs jogosultsága!");

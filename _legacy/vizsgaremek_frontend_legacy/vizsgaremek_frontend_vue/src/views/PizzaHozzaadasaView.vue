@@ -109,7 +109,7 @@ export default {
 
                 })
                 .catch((error) => {
-                    //alert(error);
+                    //console.log(error);
                 });
         },
         pizzaHozzaadas(Name, Other, Url, Active, Price) {
@@ -134,7 +134,7 @@ export default {
                 })
                 .catch((error) => {
                     //console.log(error);
-                    alert("POST ERROR:\n" + error.message + "\nKérem ellenőrizze, egyedi nevet vett-e fel!");
+                    alert("Kérem ellenőrizze, egyedi nevet vett-e fel!");
                 });
             } else {
                 alert("A pizzák hozzáadásához nincs jogosultsága!")

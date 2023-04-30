@@ -218,7 +218,6 @@ export default {
   methods: {
     logoutClick() {
       let url = "https://localhost:5001/Logout/" + this.$store.state.Uid;
-      //console.log(url);
       axios
         .post(url)
         .then((response) => {
@@ -227,12 +226,9 @@ export default {
             this.$store.state.Uid = "";
             this.$store.state.teljesNev = "";
             this.$store.state.jogosultsag = 0;
-            //alert(response.data);
-            //document.getElementById("adminButton").innerHTML = "Admin";
             document.location.href = "/";
           } else {
-            //alert(response.data);
-
+            alert("Hiba:"+response.data + "\nA kijelentkezés nem sikerült.");
           }
         })
         .catch((error) => {
@@ -244,7 +240,6 @@ export default {
         .post("https://localhost:5001/Login/SaltRequest/" + FelhasznaloNeve)
         .then((response) => {
           let lekertSalt = response.data;
-          console.log(lekertSalt);
           let tmpHash = sha256(Password + lekertSalt).toString();
           let url =
             "https://localhost:5001/Login?nev=" +
@@ -261,16 +256,13 @@ export default {
                 this.$store.state.logged = true;
                 alert("Sikeres bejelentkezés: " + this.$store.state.userName);
                 this.refreshData();
-              } else {
-                alert(this.$store.state.Uid);
-              }
+              } 
             })
             .catch((error) => {
               alert("Hiba történt:\n" + error.message + "\nHibás felhasználónév vagy jelszó!");
             });
         })
         .catch((error) => {
-          //console.log(error);
           alert("Hiba történt:\n" + error.message + "\nFelhasználó nem található");
         });
     },
@@ -292,10 +284,9 @@ export default {
         .get(url)
         .then((response) => {
           this.felhasznalok = response.data;
-          //console.log(this.felhasznalok);
         })
         .catch((error) => {
-          //alert(error);
+          //console.log(error);
         });
     },
     felhasznaloBeolvasasa(adId) {
@@ -314,7 +305,7 @@ export default {
           element.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
         })
         .catch((error) => {
-          //alert(error);
+          //console.log(error);
         });
     },
     felhasznaloMentes(adId, adName, adPermission, adEmail, adPhone, active, pwd) {
@@ -391,10 +382,9 @@ export default {
             .delete(url)
             .then((response) => {
               if (response.status == 200) {
-                alert(response.data);
                 this.felhasznalokBeolvasasa();
               } else {
-                //alert(response.data);
+                //console.log(response.data);
               }
             })
             .catch((error) => {

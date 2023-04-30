@@ -52,13 +52,12 @@ export default {
                 .get(url)
                 .then((response) => {
                     this.$store.state.products = response.data;
-                    //console.log(this.products);
                     for (let i = 0; i < 4; i++) {
                         this.favProducts.push(this.$store.state.products[i + i * 2]);
                     }
                 })
                 .catch((error) => {
-                    //alert(error);
+                    //console.log(error);
                 });
         },
         deleteClick(product) {
@@ -69,17 +68,12 @@ export default {
                         .delete(url)
                         .then((response) => {
                             if (response.status == 200) {
-                                //alert(response.data);
                                 this.pizzakBeolvasasa();
                             } else {
-                                //alert(response.data);
+                                alert("A törlés nem sikerült!");
                             }
                         })
-                        .catch((error) => {
-                            //console.log(error);
-                        });
-                } else {
-                    // Do nothing!
+                        .catch((error) => {console.log(error)});
                 }
             } else {
                 alert("A pizzák törléséhez nincs jogosultsága!");

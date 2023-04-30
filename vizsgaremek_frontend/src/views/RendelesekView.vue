@@ -228,9 +228,7 @@ export default {
       axios
         .get(url)
         .then((response) => {
-          console.log(this.status);
           this.dolgozok = response.data;
-          console.log(this.dolgozok);
         })
         .catch((error) => {
           //alert(error);
@@ -260,7 +258,6 @@ export default {
         .get(url)
         .then((response) => {
           this.rendelesek = response.data;
-          //console.log(this.rendelesek);
         })
         .catch((error) => {
           //alert(error);
@@ -288,11 +285,10 @@ export default {
         });
     },
     rendelesMentes(orId, adId, orData, name, address, phone, email, status) {
-      console.log(this.jog);
+
       if (this.jog >= 7) {
       if (orId === "") {
         //POST
-        console.log("rendelésmentés post");
         axios.post("https://localhost:5001/Order", {
           "adId": adId,
           "orData": orData,
@@ -314,12 +310,10 @@ export default {
             }
           })
           .catch((error) => {
-            //console.log(error);
             alert("Hiba történt:\n" + error.message);
           });
       } else {
         //PUT
-        console.log("rendelésmentés put");
         axios
           .put("https://localhost:5001/Order/" + orId, {
             "adId": adId,
@@ -343,7 +337,6 @@ export default {
             }
           })
           .catch((error) => {
-            //console.log(error);
             alert("Hiba történt:\n" + error.message);
           });
       }
@@ -360,7 +353,6 @@ export default {
           .delete(url)
           .then((response) => {
             if (response.status == 200) {
-              alert(response.data);
               this.rendelesekBeolvasasa();
             } else {
               //alert(response.data);
@@ -396,13 +388,12 @@ export default {
       let isName = /^[a-zA-ZáéíóöőúüűÁÉÍÓÖŐÚÜŰ\s]*$/.test(this.Name);
       let isPhone = /^(?:(?:\+|00)[01]|(?:\+|00)36|0[06])(?:1|20|30|31|40|50|70|71|72|73|75|76|[2-9]\d{1})[0-9]{6,7}$/.test(this.phone);
       let isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.email);
-      console.log("ellenőrzés");
+
       if (this.adId !== "" && this.orData && this.name && isName && this.address && this.phone && isPhone && this.email && isEmail && this.status !== "") {
-        console.log("mentés functionig eljött");
+
         this.rendelesMentes(this.orId, this.adId, this.orData, this.name, this.address, this.phone, this.email, this.status)
       }
 
-      console.log(this.adId);
 
       this.errors = [];
 

@@ -227,12 +227,9 @@ export default {
             this.$store.state.Uid = "";
             this.$store.state.teljesNev = "";
             this.$store.state.jogosultsag = 0;
-            //alert(response.data);
-            //document.getElementById("adminButton").innerHTML = "Admin";
             document.location.href = "/";
           } else {
             //alert(response.data);
-
           }
         })
         .catch((error) => {
@@ -244,7 +241,6 @@ export default {
         .post("https://localhost:5001/Login/SaltRequest/" + FelhasznaloNeve)
         .then((response) => {
           let lekertSalt = response.data;
-          console.log(lekertSalt);
           let tmpHash = sha256(Password + lekertSalt).toString();
           let url =
             "https://localhost:5001/Login?nev=" +
@@ -292,7 +288,6 @@ export default {
         .get(url)
         .then((response) => {
           this.felhasznalok = response.data;
-          //console.log(this.felhasznalok);
         })
         .catch((error) => {
           //alert(error);
@@ -391,7 +386,6 @@ export default {
             .delete(url)
             .then((response) => {
               if (response.status == 200) {
-                alert(response.data);
                 this.felhasznalokBeolvasasa();
               } else {
                 //alert(response.data);
