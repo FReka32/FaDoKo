@@ -57,7 +57,7 @@ export default {
                     }
                 })
                 .catch((error) => {
-                    alert("Beolvasás nem sikerült!\nHiba: " + error.message);
+                    //alert("Beolvasás nem sikerült!\nHiba: " + error.message);
                 });
         },
         deleteClick(product) {
