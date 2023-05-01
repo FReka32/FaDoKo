@@ -7,7 +7,6 @@
                     <div class="col-12 col-md-6 col-lg-4">
 
                         <div class="p-5 pb-4 border-bottom-0">
-                            <!-- <h1 class="modal-title fs-5" >Modal title</h1> -->
                             <h1 class="fw-bold mb-4 fs-2 text-center">Új pizza hozzáadása</h1>
                         </div>
 

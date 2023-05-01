@@ -7,7 +7,6 @@
                     <div class="col-12 col-md-6 col-lg-4">
 
                         <div class="p-5 pb-4 border-bottom-0">
-                            <!-- <h1 class="modal-title fs-5" >Modal title</h1> -->
                             <h1 class="fw-bold mb-4 fs-2 text-center">Pizza módosítása</h1>
                         </div>
 
@@ -102,11 +101,11 @@ export default {
                 .get(url)
                 .then((response) => {
                     this.pizza = response.data;
-                    this.Name = this.pizza.prName,
-                        this.Other = this.pizza.prOther,
-                        this.Url = this.pizza.prUrl,
-                        this.Active = this.pizza.prActive,
-                        this.Price = this.pizza.prPrice
+                    this.Name = this.pizza.prName;
+                    this.Other = this.pizza.prOther;
+                    this.Url = this.pizza.prUrl;
+                    this.Active = this.pizza.prActive;
+                    this.Price = this.pizza.prPrice;
                 })
                 .catch((error) => {
                     alert("Beolvasás nem sikerült!\nHiba: " + error.message);
@@ -146,7 +145,7 @@ export default {
                             }
 
                         } else {
-                            alert("Mentés nem sikerült!\nHibakód:"+respone.status);
+                            alert("Mentés nem sikerült!\nHibakód:" + respone.status);
                         }
                     })
                     .catch(() => {

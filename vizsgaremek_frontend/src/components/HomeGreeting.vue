@@ -33,8 +33,7 @@ export default {
     background-image: url(../assets/home_greeting.jpg);
     background-position-x: center;
     background-position-y: center;
-    background-repeat-x: no-repeat;
-    background-repeat-y: no-repeat;
+    background-repeat: no-repeat;
     background-color: #40a502;
 }
 

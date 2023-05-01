@@ -14,9 +14,9 @@
               <p class="mb-3">Jogosultságszint:&nbsp;&nbsp;&nbsp;<strong>{{ this.$store.state.jogosultsag }}</strong></p>
             </div>
             <div class="px-0" v-if=" jog >= 7">
-              <h2 class="fs-5">Regisztrált felhasználók:</h2>
+              <h2 class="fs-5" id="usersTableTitle">Regisztrált felhasználók:</h2>
               <div class="pb-lg-5 my-3 horizontal-scroll">
-                <table class="table table-striped helpyou_table text_dark_green ff_comfortaa " id="regTable">
+                <table class="table table-striped helpyou_table text_dark_green ff_comfortaa " id="regTable" aria-describedby="usersTableTitle">
                   <thead class="thead-dark">
                     <tr>
                       <th>ID</th>
@@ -270,13 +270,11 @@ export default {
     },
     refreshData() {
       if (this.$store.state.logged) {
-        //document.getElementById("adminButton").innerHTML = "Admin";
         if (this.$store.state.jogosultsag >= 4) {
           document.getElementById("adminOrders").classList.remove("d-none");
         }
         document.getElementById('homePage').click();
       } else {
-        //document.getElementById("adminButton").innerHTML = "Admin";
         document.getElementById("adminOrders").classList.add("d-none");
       }
     },
@@ -436,7 +434,7 @@ export default {
     checkModositasForm: function (e) {
       let isUname = /^[a-zA-ZáéíóöőúüűÁÉÍÓÖŐÚÜŰ0-9\s]*$/.test(this.adName);
       let isPwd = /^[a-zA-Z0-9]+$/.test(this.pwd);
-      let isPhone = /^(?:(?:\+|00)[01]|(?:\+|00)36|0[06])(?:1|20|30|31|40|50|70|71|72|73|75|76|[2-9]\d{1})[0-9]{6,7}$/.test(this.adPhone);
+      let isPhone = /^(?:(?:\+|00)[01]|(?:\+|00)36|0[06])(?:1|20|30|31|40|50|70|71|72|73|75|76|[2-9]\d{1,2})\d{6,7}$/.test(this.adPhone);
       let isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.adEmail);
 
       if (this.adName && isUname && this.adPermission !== "" && this.adEmail && isEmail && this.adPhone && isPhone && this.active !== "" && this.pwd && isPwd) {

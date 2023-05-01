@@ -1,6 +1,6 @@
 <template>
     <div class="card shadow-sm h-100" v-bind:style="[pizza.prActive ? { opacity: 1 } : { opacity: 0.7 }]">
-        <img class="img-fluid" :src="'data:image/jpeg;base64,' + pizza.prUrl" width="500" height="225">
+        <img class="img-fluid" :src="'data:image/jpeg;base64,' + pizza.prUrl" width="500" height="225" :alt=pizza.prName>
         <div class="card-body">
             <div class="card-text d-flex flex-column h-100 justify-content-between">
                 <div>

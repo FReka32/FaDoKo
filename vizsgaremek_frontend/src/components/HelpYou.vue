@@ -1,9 +1,9 @@
 <template>
     <div class="helpyou position-relative ff_comfortaa  bg_light_green text_dark_green lg_shadow">
         <div class="container mx-auto p-md-5">
-            <h2 class="text-center text-2 mb-5 pt-5">{{ title }}</h2>
+            <h2 class="text-center text-2 mb-5 pt-5" id="helpYouTitle">{{ title }}</h2>
             <div class="d-flex-justify-content-center">
-                <table class="table table-striped helpyou_table text_dark_green" >
+                <table class="table table-striped helpyou_table text_dark_green" aria-describedby="helpYouTitle">
                     <tbody>
                         <tr>
                             <td class="col-6">Telefon:</td>
@@ -50,8 +50,7 @@ export default {
     background-image: url(../assets/pizzeria.jpg);
     background-position-x: center;
     background-position-y: center;
-    background-repeat-x: no-repeat;
-    background-repeat-y: no-repeat;
+    background-repeat: no-repeat;
     background-color: #40a502;
 }
 .helpyou_table{

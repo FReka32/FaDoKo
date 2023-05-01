@@ -1,6 +1,6 @@
 <template>
     <div class="card shadow-sm">
-        <img class="img-fluid" :src="'data:image/jpeg;base64,' + pizzaFav.prUrl">
+        <img class="img-fluid" :src="'data:image/jpeg;base64,' + pizzaFav.prUrl" :alt=pizzaFav.prName>
         <div class="card-body">
             <div class="card-text">
                 <p class="ff_comfortaa mb-3 h5">{{ pizzaFav.prName }}</p>

@@ -2,13 +2,12 @@
   <div class="rendelesek mt-5">
     <div class=" ff_comfortaa  bg_light_green text_dark_green lg_shadow py-5">
       <div class="p-5 pb-4 border-bottom-0">
-        <!-- <h1 class="modal-title fs-5" >Modal title</h1> -->
         <h1 class="fw-bold mb-4 fs-2 text-center" id="pageTop">Rendelések</h1>
       </div>
       <div v-if="logged" class="row mx-0">
         <div class="col-12 offset-0 col-md-10 offset-md-1">
           <div class="p-2 px-lg-5 pb-lg-5 pt-0 horizontal-scroll">
-            <table class="table table-striped helpyou_table text_dark_green ff_comfortaa ">
+            <table class="table table-striped helpyou_table text_dark_green ff_comfortaa" aria-describedby="pageTop">
               <thead class="thead-dark">
                 <tr>
                   <th>Rendelés azonosító</th>
@@ -384,7 +383,7 @@ export default {
     },
     checkForm: function (e) {
       let isName = /^[a-zA-ZáéíóöőúüűÁÉÍÓÖŐÚÜŰ\s]*$/.test(this.Name);
-      let isPhone = /^(?:(?:\+|00)[01]|(?:\+|00)36|0[06])(?:1|20|30|31|40|50|70|71|72|73|75|76|[2-9]\d{1})[0-9]{6,7}$/.test(this.phone);
+      let isPhone = /^(?:(?:\+|00)[01]|(?:\+|00)36|0[06])(?:1|20|30|31|40|50|70|71|72|73|75|76|[2-9]\d{1,2})\d{6,7}$/.test(this.phone);
       let isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.email);
 
       if (this.adId !== "" && this.orData && this.name && isName && this.address && this.phone && isPhone && this.email && isEmail && this.status !== "") {

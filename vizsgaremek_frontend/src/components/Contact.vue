@@ -7,12 +7,8 @@
                     <div class="aboutus_img_container p-3 p-xl-5 h-100">
                         <div class="bg_img">
                             <div class="map_container">
-                                <!--iframe width="100%" height="240" frameborder="0" scrolling="no" marginheight="0"
-                                    marginwidth="0"
-                                    src="https://www.openstreetmap.org/export/embed.html?bbox=20.79657%2C48.10252%2C20.79657%2C48.10252&layer=mapnik&marker=48.10252,%2020.79657"></iframe-->
-
-                                <iframe width="100%" height="240" frameborder="0" scrolling="no" marginheight="0"
-                                    marginwidth="0"
+                                <iframe width="100%" height="240"
+                                   title="Térkép"
                                     src="https://www.openstreetmap.org/export/embed.html?bbox=20.77833026647568%2C48.105002524855074%2C20.78084081411362%2C48.10624015465592&layer=mapnik&marker=48.10518765153231%2C20.779695510864258"></iframe><br /><small><a
                                         href="https://www.openstreetmap.org/#map=19/48.10562/20.77959">Nagyobb
                                         térkép</a></small>
