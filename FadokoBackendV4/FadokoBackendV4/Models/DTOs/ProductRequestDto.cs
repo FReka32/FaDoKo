@@ -3,7 +3,6 @@
     public class ProductRequestDto
     {
         public string PrName { get; set; }
-        public string PrSize { get; set; }
         public string PrOther { get; set; }
         public string CoIds { get; set; }
         public string PrUrl { get; set; }

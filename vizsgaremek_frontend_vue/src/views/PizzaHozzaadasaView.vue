@@ -105,9 +105,6 @@ export default {
                     for (let i = 0; i < 4; i++) {
                         this.favProducts.push(this.$store.state.products[i + i * 2]);
                     }
-                    for (let i = 0; i < this.$store.state.products.length; i++) {
-                        this.$store.state.products[i].prSize = JSON.parse(this.$store.state.products[i].prSize);
-                    }
 
 
                 })
@@ -120,7 +117,6 @@ export default {
             axios
                 .post("https://localhost:5001/Product", {
                     "prName": Name,
-                    "prSize": JSON.stringify({ "0": "25", "1": "35", "2": "45" }),
                     "prOther": Other,
                     "coIds": "{}",
                     "prUrl": Url,
