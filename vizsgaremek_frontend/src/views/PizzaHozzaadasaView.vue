@@ -130,7 +130,6 @@ export default {
                     }
                 })
                 .catch((error) => {
-                    //console.log(error);
                     alert("Kérem ellenőrizze, egyedi nevet vett-e fel!");
                 });
             } else {

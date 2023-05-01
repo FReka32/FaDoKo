@@ -204,9 +204,6 @@ export default {
     },
     mounted: function () {
         this.pizzaBeolvasasa();
-        //console.log(this.$store.state.productId);
-        //console.log(this.$store.state.logged);
-        //console.log(this.$store.state.jogosultsag);
     },
 };
 </script>

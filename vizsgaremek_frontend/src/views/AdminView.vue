@@ -218,7 +218,6 @@ export default {
   methods: {
     logoutClick() {
       let url = "https://localhost:5001/Logout/" + this.$store.state.Uid;
-      //console.log(url);
       axios
         .post(url)
         .then((response) => {
@@ -266,7 +265,6 @@ export default {
             });
         })
         .catch((error) => {
-          //console.log(error);
           alert("Hiba történt:\n" + error.message + "\nFelhasználó nem található");
         });
     },

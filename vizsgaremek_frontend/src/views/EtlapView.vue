@@ -72,7 +72,6 @@ export default {
         .get(url)
         .then((response) => {
           this.$store.state.products = response.data;
-          //console.log(this.$store.state.products);
           for (let i = 0; i < 4; i++) {
             this.favProducts.push(this.$store.state.products[i+i*2]);
           }
