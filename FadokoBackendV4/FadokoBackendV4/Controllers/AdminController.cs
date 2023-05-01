@@ -16,8 +16,6 @@ namespace FadokoBackendV4.Controllers
 
         public IActionResult Get()
         {
-            /*if ((Program.LoggedInUsers.ContainsKey(AdId) && Program.LoggedInUsers[AdId].AdPermission == "9"))
-            {*/
             using (var context = new vizsgaremek_v4Context())
             {
                 try
@@ -38,20 +36,13 @@ namespace FadokoBackendV4.Controllers
                     return BadRequest(ex.Message);
                 }
 
-            }/*
             }
-            else
-            {
-                return BadRequest("Error!");
-            }*/
         }
 
         [HttpGet("{AdId}")]
 
         public IActionResult Get(int AdId)
         {
-            /*if ((Program.LoggedInUsers.ContainsKey(AdId) && Program.LoggedInUsers[AdId].AdPermission == "9"))
-            {*/
             using (var context = new vizsgaremek_v4Context())
             {
                 try
@@ -73,19 +64,12 @@ namespace FadokoBackendV4.Controllers
                     return BadRequest(ex.Message);
                 }
 
-            }/*
             }
-            else
-            {
-                return BadRequest("Error!");
-            }*/
         }
         [HttpPost]
 
         public IActionResult Post(AdminRequestDto adminrequest)
         {
-            /*if (Program.LoggedInUsers.ContainsKey(uId) && Program.LoggedInUsers[uId].AdPermission == "9")
-            {*/
             using (var context = new vizsgaremek_v4Context())
             {
                 try
@@ -107,19 +91,12 @@ namespace FadokoBackendV4.Controllers
                     return BadRequest("ADMIN POST ERROR: "+ex.Message);
                 }
 
-            }/*
             }
-            else
-            {
-                return BadRequest("Error!");
-            }*/
         }
         [HttpPut("{AdId}")]
 
         public IActionResult Put(int AdId, AdminRequestDto adminupdate)
         {
-            /*if (Program.LoggedInUsers.ContainsKey(uId) && Program.LoggedInUsers[uId].AdPermission == "9")
-            {*/
             using (var context = new vizsgaremek_v4Context())
             {
                 try
@@ -142,18 +119,11 @@ namespace FadokoBackendV4.Controllers
                 }
 
             }
-            /*}
-            else
-            {
-                return BadRequest("Error!");
-            }*/
         }
         [HttpDelete("{adid}")]
 
         public IActionResult Delete(int adid)
         {
-            /*if (Program.LoggedInUsers.ContainsKey(uId) && Program.LoggedInUsers[uId].AdPermission == "9")
-            {*/
             using (var context = new vizsgaremek_v4Context())
             {
                 try
@@ -168,12 +138,7 @@ namespace FadokoBackendV4.Controllers
                     return BadRequest(ex.Message);
                 }
 
-            }/*
             }
-            else
-            {
-                return BadRequest("Error!");
-            }*/
         }
     }
 }

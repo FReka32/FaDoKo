@@ -16,8 +16,6 @@ namespace FadokoBackendV4.Controllers
 
             public IActionResult Get()
             {
-                /*if ((Program.LoggedInUsers.ContainsKey(uId) && Program.LoggedInUsers[uId].AdPermission == "9"))
-                {*/
                 using (var context = new vizsgaremek_v4Context())
                 {
                     try
@@ -29,20 +27,13 @@ namespace FadokoBackendV4.Controllers
                     {
                         return BadRequest(ex.Message);
                     }
-                }/*
-            }
-            else
-            {
-                return BadRequest("Error!");
-            }*/
+                }
             }
 
             [HttpGet("{PrId}")]
 
             public IActionResult Get(int PrId)
             {
-                /*if ((Program.LoggedInUsers.ContainsKey(uId) && Program.LoggedInUsers[uId].AdPermission == "9"))
-                {*/
                 using (var context = new vizsgaremek_v4Context())
                 {
                     try
@@ -56,19 +47,12 @@ namespace FadokoBackendV4.Controllers
                         return BadRequest(ex.Message);
                     }
 
-                }/*
-            }
-            else
-            {
-                return BadRequest("Error!");
-            }*/
+                }
             }
             [HttpPost]
 
             public IActionResult Post(ProductRequestDto productrequest)
             {
-                /*if (Program.LoggedInUsers.ContainsKey(uId) && Program.LoggedInUsers[uId].AdPermission == "9")
-                {*/
                 using (var context = new vizsgaremek_v4Context())
                 {
                     try
@@ -88,19 +72,12 @@ namespace FadokoBackendV4.Controllers
                         return BadRequest(ex.Message);
                     }
 
-                }/*
-            }
-            else
-            {
-                return BadRequest("Error!");
-            }*/
+                }
             }
             [HttpPut("{PrId}")]
 
             public IActionResult Put(int PrId, ProductRequestDto productupdate)
             {
-                /*if (Program.LoggedInUsers.ContainsKey(uId) && Program.LoggedInUsers[uId].AdPermission == "9")
-                {*/
                 using (var context = new vizsgaremek_v4Context())
                 {
                     try
@@ -121,18 +98,11 @@ namespace FadokoBackendV4.Controllers
                     }
 
                 }
-                /*}
-                else
-                {
-                    return BadRequest("Error!");
-                }*/
             }
             [HttpDelete("{prid}")]
 
             public IActionResult Delete(int prid)
             {
-                /*if (Program.LoggedInUsers.ContainsKey(uId) && Program.LoggedInUsers[uId].AdPermission == "9")
-                {*/
                 using (var context = new vizsgaremek_v4Context())
                 {
                     try
@@ -147,12 +117,7 @@ namespace FadokoBackendV4.Controllers
                         return BadRequest(ex.Message);
                     }
 
-                }/*
-            }
-            else
-            {
-                return BadRequest("Error!");
-            }*/
+                }
             }
     }
 }
