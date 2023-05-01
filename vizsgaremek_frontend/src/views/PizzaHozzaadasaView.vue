@@ -104,11 +104,9 @@ export default {
                     for (let i = 0; i < 4; i++) {
                         this.favProducts.push(this.$store.state.products[i + i * 2]);
                     }
-
-
                 })
                 .catch((error) => {
-                    //alert(error);
+                     alert("Beolvasás nem sikerült!\nHiba: " + error.message);
                 });
         },
         pizzaHozzaadas(Name, Other, Url, Active, Price) {

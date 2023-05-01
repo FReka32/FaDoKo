@@ -80,7 +80,7 @@ export default {
 
         })
         .catch((error) => {
-          //alert(error);
+          alert("Beolvasás nem sikerült!\nHiba: " + error.message);
         });
     }
   },

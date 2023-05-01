@@ -109,7 +109,7 @@ export default {
                         this.Price = this.pizza.prPrice
                 })
                 .catch((error) => {
-                    //alert(error);
+                    alert("Beolvasás nem sikerült!\nHiba: " + error.message);
                 });
         },
         pizzakBeolvasasa() {
@@ -124,7 +124,7 @@ export default {
 
                 })
                 .catch((error) => {
-                    //alert(error);
+                    alert("Beolvasás nem sikerült!\nHiba: " + error.message);
                 });
         },
         pizzaModositas(Name, Other, Url, Active, Price) {
@@ -143,16 +143,13 @@ export default {
                             if (confirm("Mentés sikeres. Végzett a módosítással és visszatér az Étlap oldalra?")) {
                                 this.pizzakBeolvasasa();
                                 document.getElementById('etlapLink').click();
-                            } else {
-                                //stay on page
                             }
 
                         } else {
-                            alert("Mentés nem sikerült");
+                            alert("Mentés nem sikerült!\nHibakód:"+respone.status);
                         }
                     })
-                    .catch((error) => {
-                        //console.log(error);
+                    .catch(() => {
                         alert("Kérem ellenőrizze, egyedi nevet vett-e fel!");
                     });
             } else {

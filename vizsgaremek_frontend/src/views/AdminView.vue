@@ -229,11 +229,11 @@ export default {
             this.$store.state.jogosultsag = 0;
             document.location.href = "/";
           } else {
-            //alert(response.data);
+            alert("Kijelentkezés nem sikerült!\nHibakód: " + response.status);
           }
         })
         .catch((error) => {
-          //console.log(error);
+          alert("Kijelentkezés nem sikerült!\nHiba: " + error.message);
         });
     },
     loginClick(FelhasznaloNeve, Password) {
@@ -258,7 +258,7 @@ export default {
                 alert("Sikeres bejelentkezés: " + this.$store.state.userName);
                 this.refreshData();
               } else {
-                alert(this.$store.state.Uid);
+                alert("Bejelentkezés nem sikerült!\nHibakód: " + response.status);
               }
             })
             .catch((error) => {
@@ -290,7 +290,7 @@ export default {
           this.felhasznalok = response.data;
         })
         .catch((error) => {
-          //alert(error);
+          alert("Beolvasás nem sikerült!\nHiba: " + error.message);
         });
     },
     felhasznaloBeolvasasa(adId) {
@@ -309,7 +309,7 @@ export default {
           element.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
         })
         .catch((error) => {
-          //alert(error);
+          alert("Beolvasás nem sikerült!\nHiba: " + error.message);
         });
     },
     felhasznaloMentes(adId, adName, adPermission, adEmail, adPhone, active, pwd) {
@@ -334,12 +334,11 @@ export default {
                 element.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
                 this.felhasznaloMegse();
               } else {
-                alert("Felhasználó mentése nem sikerült");
+                alert("Felhasználó mentése nem sikerült!\nHibakód: "+response.status);
               }
             })
             .catch((error) => {
-              //console.log(error);
-              alert("Hiba történt:\n" + error.message);
+              alert("Mentés nem sikerült!\nHiba: " + error.message);
             });
         } else {
           //PUT
@@ -362,12 +361,11 @@ export default {
                 element.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
                 this.felhasznaloMegse();
               } else {
-                alert("Módosítás mentése nem sikerült");
+                alert("Módosítás mentése nem sikerült!\nHibakód: "+respone.status);
               }
             })
             .catch((error) => {
-              //console.log(error);
-              alert("Hiba történt:\n" + error.message);
+              alert("Módosítás mentése nem sikerült!\nHiba: " + error.message);
             });
         }
       } else {
@@ -388,15 +386,13 @@ export default {
               if (response.status == 200) {
                 this.felhasznalokBeolvasasa();
               } else {
-                //alert(response.data);
+                alert("Törlés nem sikerült!\nHibakód: " + response.status);
               }
             })
             .catch((error) => {
-              //console.log(error);
+              alert("Törlés nem sikerült!\nHiba: " + error.message);
             });
-        } else {
-          // Do nothing!
-        }
+        } 
       } else {
         alert("A felhasználók törléséhez nincs jogosultsága!");
       }

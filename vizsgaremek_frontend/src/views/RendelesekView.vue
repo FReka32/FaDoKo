@@ -231,7 +231,7 @@ export default {
           this.dolgozok = response.data;
         })
         .catch((error) => {
-          //alert(error);
+          alert("Beolvasás nem sikerült!\nHiba: " + error.message);
         });
     },
     pizzakBeolvasasa() {
@@ -243,7 +243,7 @@ export default {
 
         })
         .catch((error) => {
-          //alert(error);
+          alert("Beolvasás nem sikerült!\nHiba: " + error.message);
         });
     },
     pizzaHozzaadasaRendeleshez(pizzaId, meret) {
@@ -260,7 +260,7 @@ export default {
           this.rendelesek = response.data;
         })
         .catch((error) => {
-          //alert(error);
+          alert("Beolvasás nem sikerült!\nHiba: " + error.message);
         });
     },
     rendelesBeolvasasa(orderId) {
@@ -281,7 +281,7 @@ export default {
           element.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
         })
         .catch((error) => {
-          //alert(error);
+          alert("Beolvasás nem sikerült!\nHiba: " + error.message);
         });
     },
     rendelesMentes(orId, adId, orData, name, address, phone, email, status) {
@@ -306,11 +306,11 @@ export default {
               const element = document.getElementById("pageTop");
               element.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
             } else {
-              alert("Mentés nem sikerült");
+              alert("Mentés nem sikerült!\nHibakód: " + response.status);
             }
           })
           .catch((error) => {
-            alert("Hiba történt:\n" + error.message);
+            alert("Mentés nem sikerült!\nHiba: " + error.message);
           });
       } else {
         //PUT
@@ -327,17 +327,17 @@ export default {
           })
           .then((response) => {
             if (response.status == 200) {
-              alert("Mentés sikeres");
+              alert("Mentés sikeres!");
               this.rendelesekBeolvasasa();
               const element = document.getElementById(orId);
               element.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
 
             } else {
-              alert("Mentés nem sikerült");
+              alert("Mentés nem sikerült!\nHibakód: " + response.status);
             }
           })
           .catch((error) => {
-            alert("Hiba történt:\n" + error.message);
+            alert("Mentés nem sikerült!\nHiba: " + error.message);
           });
       }
     }else{
@@ -355,14 +355,12 @@ export default {
             if (response.status == 200) {
               this.rendelesekBeolvasasa();
             } else {
-              //alert(response.data);
+              alert("A törlés nem sikerült!\nHibakód: " + respone.status);
             }
           })
           .catch((error) => {
-            //console.log(error);
+            alert("A törlés nem sikerült!\nHiba: " + error.message);
           });
-      } else {
-        // Do nothing!
       }
     } else {
       alert("A rendelések törléséhez nincs jogosultsága!");
