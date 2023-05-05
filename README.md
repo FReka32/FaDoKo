@@ -13,4 +13,8 @@ nincs szükség előkészületre, az alkalmazás a FadokoBackendV4\FadokoBackend
 1. Tömörített mappa lemásolása és kicsomagolása
 2. Az alkalmazás a mappában, helyi parancsorban kiadott npm run serve paranccsal indítható
 ```
-
+## Teszt felhasználó
+Felhasználónév: "a"
+Jelszó: "a"
+Jogosultság teszteléshez fekhasználók: jog8, jog7, jog6, jog5, jog4.
+Jelszavak megegyeznek a felhasználó nevekkel.
